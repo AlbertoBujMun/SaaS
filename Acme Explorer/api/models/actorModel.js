@@ -24,22 +24,19 @@ var ActorSchema = new Schema({
     type : String,
     default : "en"
   },
-  phone: {
+  phoneNumber: {
     type: String,
     required: 'Kindly enter the phone number'
   },
   address:{
     type: String
   },
-  photo: {
-    data: Buffer, contentType: String
-  },
   role: [{
     type: String,
     required: 'Kindly enter the user role(s)',
-    enum: ['CUSTOMER', 'CLERK', 'ADMINISTRATOR']
+    enum: ['MANAGER', 'EXPLORER', 'ADMINISTRATOR', 'SPONSOR']
   }],
-  validated:{
+  deleted:{
     type: Boolean,
     default: false
   },
