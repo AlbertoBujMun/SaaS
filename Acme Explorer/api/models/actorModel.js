@@ -40,6 +40,10 @@ var ActorSchema = new Schema({
     type: Boolean,
     default: false
   },
+  banned:{
+    type: Boolean,
+    default: false
+  },
   created: {
     type: Date,
     default: Date.now
