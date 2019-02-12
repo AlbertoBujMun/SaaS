@@ -40,11 +40,25 @@ var ActorSchema = new Schema({
     type: Boolean,
     default: false
   },
+  banned:{
+    type: Boolean,
+    default: false
+  },
   created: {
     type: Date,
     default: Date.now
+  },
+  banner: {
+    data: Buffer,
+    contentType: String,
+    required: [isSponsor,'Kindly enter a sponsor banner']
+  },
+  link: {
+    contentType: String,
+    required: [isSponsor,'Kindly enter a sponsor link']
   }
 }, { strict: false });
 
+function isSponsor() { return this.role === 'SPONSOR'; }
 
 module.exports = mongoose.model('Actors', ActorSchema);
