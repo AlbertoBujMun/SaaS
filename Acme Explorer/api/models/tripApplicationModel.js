@@ -6,7 +6,12 @@ var TripApplicationSchema = new Schema(
   {
     ticker: {
       type: String,
-      required: ""
+      validate: {
+        validator: function(v) {
+          return /\d{6}-[A-Z]{4}/.test(v);
+        },
+        message: 'ticker is not valid!, Pattern("d{6}-[A-Z]{4}")'
+      }
     },
     status: {
       type: String,

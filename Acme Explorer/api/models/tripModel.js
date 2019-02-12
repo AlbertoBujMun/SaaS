@@ -28,7 +28,7 @@ var TripSchema = new Schema(
   {
     ticker: {
       type: String,
-      required: ""
+      unique: true
     },
     title: {
       type: String,
@@ -74,5 +74,17 @@ var TripSchema = new Schema(
   },
   { strict: false }
 );
+
+// Execute before each trip.save() call
+TripSchema.pre("save", function(callback) {
+  var new_trip = this;
+  var day = dateFormat(new Date(), "yymmdd");
+
+  var generated_ticker = [day, generate("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 4)].join(
+    "-"
+  );
+  new_trip.ticker = generated_ticker;
+  callback();
+});
 
 module.exports = mongoose.model("Trips", TripSchema);
