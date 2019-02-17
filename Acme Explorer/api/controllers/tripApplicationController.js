@@ -38,6 +38,10 @@ exports.read_a_tripApplication = function(req, res) {
   });
 };
 
+exports.pay_a_tripApplication = function(req, res) {
+  res.sendStatus(200)
+};
+
 exports.update_a_tripApplication = function(req, res) {
   TripApplication.findById(req.params.tripApplicationId, function(
     err,

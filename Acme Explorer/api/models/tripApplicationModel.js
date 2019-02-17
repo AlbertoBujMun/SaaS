@@ -21,16 +21,24 @@ var TripApplicationSchema = new Schema(
     comments: {
       type: String
     },
-    email: {
-      type: String,
-      required: "Kindly enter the user's email"
-    },
     applicationDate: {
       type: Date,
       default: Date.now
+    },
+    rejectionReason: {
+      contentType: String,
+      required: [isSponsor, "Kindly enter a rejection reason"]
+    },
+    explorer: {
+      type: Schema.Types.ObjectId,
+      required: 'Explorer id is required'
     }
   },
   { strict: false }
 );
+
+function isRejected() {
+  return this.status === "REJECTED";
+}
 
 module.exports = mongoose.model("TripApplications", TripApplicationSchema);

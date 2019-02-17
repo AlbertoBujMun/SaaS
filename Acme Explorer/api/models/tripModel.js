@@ -66,9 +66,17 @@ var TripSchema = new Schema(
       type: Date,
       default: Date.now
     },
+    public: {
+      type: Boolean,
+      default: false
+    },
     deleted: {
       type: Boolean,
       default: false
+    },
+    manager: {
+      type: Schema.Types.ObjectId,
+      required: 'Manager id is required'
     },
     tripStage: [TripStageSchema]
   },
