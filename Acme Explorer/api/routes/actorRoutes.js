@@ -160,7 +160,7 @@ module.exports = function(app) {
      *           $ref: '#/definitions/Actors'
      */
     app
-        .route("/actors/:actorId")
+        .route("/v1/actors/:actorId")
         .get(actors.read_an_actor)
         .put(actors.update_an_actor)
         .delete(actors.delete_an_actor);

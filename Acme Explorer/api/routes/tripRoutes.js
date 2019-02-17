@@ -25,7 +25,7 @@ module.exports = function(app) {
      */
     /**
      * @swagger
-     * /trips:
+     * /v1/trips:
      *   get:
      *     tags:
      *       - Trips
@@ -40,7 +40,7 @@ module.exports = function(app) {
      */
     /**
      * @swagger
-     * /trips:
+     * /v1/trips:
      *   post:
      *     tags:
      *       - Trips
@@ -54,12 +54,12 @@ module.exports = function(app) {
      *           $ref: '#/definitions/actors'
      */
     app
-        .route("/trips")
+        .route("/v1/trips")
         .get(trip.list_all_trips)
         .post(trip.create_a_trip);
     /**
      * @swagger
-     * /trips/:tripId:
+     * /v1/trips/:tripId:
      *   get:
      *     tags:
      *       - Trips
@@ -74,7 +74,7 @@ module.exports = function(app) {
      */
     /**
      * @swagger
-     * /trips/:tripId:
+     * /v1/trips/:tripId:
      *   put:
      *     tags:
      *       - Trips
@@ -89,7 +89,7 @@ module.exports = function(app) {
      */
     /**
      * @swagger
-     * /trips/:tripId:
+     * /v1/trips/:tripId:
      *   delete:
      *     tags:
      *       - Trips
@@ -103,7 +103,7 @@ module.exports = function(app) {
      *           $ref: '#/definitions/actors'
      */
     app
-        .route("/trips/:tripId")
+        .route("/v1/trips/:tripId")
         .get(trip.read_a_trip)
         .put(trip.update_a_trip)
         .delete(trip.delete_a_trip);
