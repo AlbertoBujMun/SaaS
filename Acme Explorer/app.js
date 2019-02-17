@@ -1,15 +1,42 @@
 var express = require('express'),
-  app = express(),
-  port = process.env.PORT || 8080,
-  mongoose = require('mongoose'),
-  Actor = require('./api/models/actorModel'),
-  bodyParser = require('body-parser');
+    port = process.env.PORT || 8080,
+    mongoose = require('mongoose'),
+    Actor = require('./api/models/actorModel'),
+    bodyParser = require('body-parser'),
+    swaggerJSDoc = require('swagger-jsdoc'),
+    swaggerUi = require('swagger-ui-express'),
+    app = express();
+
+// swagger definition
+var swaggerDefinition = {
+    info: {
+        title: 'Acme Explorer API',
+        version: '1.0.0',
+        description: 'Demonstrating how to desribe a RESTful API with Swagger',
+    },
+    host: 'localhost:' + port,
+    basePath: '/api',
+};
+
+// options for the swagger docs
+var options = {
+    // import swaggerDefinitions
+    swaggerDefinition: swaggerDefinition,
+    // path to the API docs
+    apis: ['./api/routes/*.js'],
+    basePath: ' / ', //  Base de ruta (opcional)  
+};
+
+// initialize swagger-jsdoc
+var swaggerSpec = swaggerJSDoc(options);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // MongoDB URI building
 var mongoDBHostname = process.env.mongoDBHostname || "localhost";
 var mongoDBPort = process.env.mongoDBPort || "27017";
-var mongoDBName = process.env.mongoDBName || "ACME-Market";
+var mongoDBName = process.env.mongoDBName || "ACME-EXPLORER";
 var mongoDBURI = "mongodb://" + mongoDBHostname + ":" + mongoDBPort + "/" + mongoDBName;
+
 
 mongoose.connect(mongoDBURI, {
     reconnectTries: 10,
@@ -24,6 +51,7 @@ mongoose.connect(mongoDBURI, {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
 var routesActors = require('./api/routes/actorRoutes');
 
 
@@ -31,12 +59,17 @@ routesActors(app);
 
 
 console.log("Connecting DB to: " + mongoDBURI);
-mongoose.connection.on("open", function (err, conn) {
-    app.listen(port, function () {
-        console.log('ACME-Market RESTful API server started on: ' + port);
+mongoose.connection.on("open", function(err, conn) {
+    app.listen(port, function() {
+        console.log('ACME-EXPORER RESTful API server started on: ' + port);
     });
 });
 
-mongoose.connection.on("error", function (err, conn) {
+mongoose.connection.on("error", function(err, conn) {
     console.error("DB init error " + err);
+});
+
+app.get('/swagger.json', function(req, res) {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(swaggerSpec);
 });
