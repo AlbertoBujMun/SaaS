@@ -57,13 +57,14 @@ var ActorSchema = new Schema(
       default: Date.now
     },
     banner: {
+      type: String,
       data: Buffer,
       contentType: String,
-      required: [isSponsor, "Kindly enter a sponsor banner"]
+      validate: [isSponsor, "Kindly enter a sponsor banner"]
     },
     link: {
-      contentType: String,
-      required: [isSponsor, "Kindly enter a sponsor link"]
+      type: String,
+      validate: [isSponsor, "Kindly enter a sponsor link"]
     }
   },
   { strict: false }
