@@ -1,23 +1,44 @@
 "use strict";
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-
-var SystemInformationSchema = new Schema(
-  {
+/**
+ * @swagger
+ * tags:
+ *   name: SystemInformation
+ *   description: 
+ */
+/**
+ * @swagger
+ * definitions:
+ *   SystemInformation:
+ *     required:
+ *       - sponsorRate
+ *       - cacheTime
+ *       - resultsNumber
+ *     properties:
+ *       sponsorRate:
+ *          type: Number
+ *       cacheTime:
+ *          type: Number
+ *       resultsNumber:
+ *          type: Number
+ *   
+ */
+var SystemInformationSchema = new Schema({
     sponsorRate: {
-      type: Number,
-      required: "please state a sponsorship rate"
+        type: Number,
+        required: "please state a sponsorship rate"
     },
     cacheTime: {
-      type: Number,
-      min:1,
-      max:24,
-      required: "please state a cached time"
+        type: Number,
+        min: 1,
+        max: 24,
+        required: "please state a cached time"
     },
     resultsNumber: {
-      type: Number,
-      maxx: 100,
-      required: "please state a maximum results number"
+        type: Number,
+        maxx: 100,
+        required: "please state a maximum results number"
     }
 
 

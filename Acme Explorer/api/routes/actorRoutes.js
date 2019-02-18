@@ -1,59 +1,13 @@
 "use strict";
 module.exports = function(app) {
     var actors = require("../controllers/actorController");
-    /**
-     * @swagger
-     * definitions:
-     *   Actor:
-     *     required:
-     *       - name
-     *       - surname
-     *       - email
-     *       - password
-     *       - preferedLanguage
-     *       - phoneNumber
-     *       - address
-     *       - role
-     *       - deleted
-     *       - banned
-     *       - created
-     *     properties:
-     *       name:
-     *          type: string
-     *       surname:
-     *          type: string
-     *       email:
-     *          type: string
-     *       password:
-     *          type: string
-     *       preferedLanguage:
-     *          type: string
-     *       phoneNumber:
-     *          type: string
-     *       address:
-     *          type: string
-     *       role:
-     *          type: string
-     *       deleted:
-     *          type: boolean
-     *       banned:
-     *          type: boolean
-     *       created:
-     *          type: date
-     */
 
-    /**
-     * @swagger
-     * tags:
-     *   name: Actors
-     *   description: User management and login
-     */
     /**
      * @swagger
      * /v1/actors:
      *   get:
      *     tags:
-     *       - Actors
+     *       - Actor
      *     summary: Returns all actors
      *     produces:
      *       - application/json
@@ -90,14 +44,10 @@ module.exports = function(app) {
      *       200:
      *         description: An array of actors
      *         schema:
-     *           $ref: '#/definitions/Actors'
-     */
-    /**
-     * @swagger
-     * /v1/actors:
+     *           $ref: '#/definitions/Actor'
      *   post:
      *     tags:
-     *       - Actors
+     *       - Actor
      *     description: Returns all actors
      *     produces:
      *       - application/json
@@ -105,7 +55,7 @@ module.exports = function(app) {
      *       200:
      *         description: An array of actors
      *         schema:
-     *           $ref: '#/definitions/Actors'
+     *           $ref: '#/definitions/Actor'
      */
     app
         .route("/v1/actors")
@@ -119,7 +69,7 @@ module.exports = function(app) {
      * /v1/actors/:actorId:
      *   get:
      *     tags:
-     *       - Actors
+     *       - Actor
      *     description: Return the actor specificate with the id
      *     produces:
      *       - application/json
@@ -127,14 +77,10 @@ module.exports = function(app) {
      *       200:
      *         description: An actor
      *         schema:
-     *           $ref: '#/definitions/Actors'
-     */
-    /**
-     * @swagger
-     * /v1/actors/:actorId:
+     *           $ref: '#/definitions/Actor'
      *   put:
      *     tags:
-     *       - Actors
+     *       - Actor
      *     description: Returns all actors
      *     produces:
      *       - application/json
@@ -142,14 +88,10 @@ module.exports = function(app) {
      *       200:
      *         description: An array of actors
      *         schema:
-     *           $ref: '#/definitions/Actors'
-     */
-    /**
-     * @swagger
-     * /v1/actors/:actorId:
+     *           $ref: '#/definitions/Actor'
      *   delete:
      *     tags:
-     *       - Actors
+     *       - Actor
      *     description: Returns all actors
      *     produces:
      *       - application/json
@@ -157,7 +99,7 @@ module.exports = function(app) {
      *       200:
      *         description: An array of actors
      *         schema:
-     *           $ref: '#/definitions/Actors'
+     *           $ref: '#/definitions/Actor'
      */
     app
         .route("/v1/actors/:actorId")

@@ -1,34 +1,13 @@
 "use strict";
 module.exports = function(app) {
     var tripApplication = require("../controllers/tripApplicationController");
-    /**
-     * @swagger
-     * definitions:
-     *   TripAplications:
-     *     required:
-     *       - username
-     *       - password
-     *     properties:
-     *       username:
-     *         type: string
-     *       password:
-     *         type: string
-     *       path:
-     *         type: string
-     */
 
-    /**
-     * @swagger
-     * tags:
-     *   name: TripAplications
-     *   description: User management and login
-     */
     /**
      * @swagger
      * /v1/tripApplications:
      *   get:
      *     tags:
-     *       - TripAplications
+     *       - TripApplication
      *     description: Returns all actors
      *     produces:
      *       - application/json
@@ -36,14 +15,10 @@ module.exports = function(app) {
      *       200:
      *         description: An array of actors
      *         schema:
-     *           $ref: '#/definitions/actors'
-     */
-    /**
-     * @swagger
-     * /v1/tripApplications:
+     *           $ref: '#/definitions/TripApplication'
      *   post:
      *     tags:
-     *       - TripAplications
+     *       - TripApplication
      *     description: Returns all actors
      *     produces:
      *       - application/json
@@ -51,7 +26,7 @@ module.exports = function(app) {
      *       200:
      *         description: An array of actors
      *         schema:
-     *           $ref: '#/definitions/actors'
+     *           $ref: '#/definitions/TripApplication'
      */
     app
         .route("/v1/tripApplications")
@@ -63,7 +38,7 @@ module.exports = function(app) {
      * /v1/tripApplications/:tripApplicationId:
      *   get:
      *     tags:
-     *       - TripAplications
+     *       - TripApplication
      *     description: Returns all actors
      *     produces:
      *       - application/json
@@ -71,14 +46,10 @@ module.exports = function(app) {
      *       200:
      *         description: An array of actors
      *         schema:
-     *           $ref: '#/definitions/actors'
-     */
-    /**
-     * @swagger
-     * /v1/tripApplications/:tripApplicationId:
+     *           $ref: '#/definitions/TripApplication'
      *   put:
      *     tags:
-     *       - TripAplications
+     *       - TripApplication
      *     description: Returns all actors
      *     produces:
      *       - application/json
@@ -86,14 +57,10 @@ module.exports = function(app) {
      *       200:
      *         description: An array of actors
      *         schema:
-     *           $ref: '#/definitions/actors'
-     */
-    /**
-     * @swagger
-     * /v1/tripApplications/:tripApplicationId:
+     *           $ref: '#/definitions/TripApplication'
      *   delete:
      *     tags:
-     *       - TripAplications
+     *       - TripApplication
      *     description: Returns all actors
      *     produces:
      *       - application/json
@@ -101,7 +68,7 @@ module.exports = function(app) {
      *       200:
      *         description: An array of actors
      *         schema:
-     *           $ref: '#/definitions/actors'
+     *           $ref: '#/definitions/TripApplication'
      */
     app
         .route("/v1/tripApplications/:tripApplicationId")
@@ -109,10 +76,39 @@ module.exports = function(app) {
         .put(tripApplication.update_a_tripApplication)
         .delete(tripApplication.delete_a_tripApplication);
 
+    /**
+     * @swagger
+     * /v1/tripApplications/:actorId:
+     *   get:
+     *     tags:
+     *       - TripApplication
+     *     description: Returns all actors
+     *     produces:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: An array of actors
+     *         schema:
+     *           $ref: '#/definitions/TripApplication'
+     */
     app
         .route("/v1/tripApplications/:actorId")
         .get(trip.list_actor_applications)
-
+        /**
+         * @swagger
+         * /v1/tripApplications/:tripApplicationId/pay:
+         *   get:
+         *     tags:
+         *       - TripApplication
+         *     description: Returns all actors
+         *     produces:
+         *       - application/json
+         *     responses:
+         *       200:
+         *         description: An array of actors
+         *         schema:
+         *           $ref: '#/definitions/TripApplication'
+         */
     app
         .route("/v1/tripApplications/:tripApplicationId/pay")
         .get(tripApplication.pay_a_tripApplication)

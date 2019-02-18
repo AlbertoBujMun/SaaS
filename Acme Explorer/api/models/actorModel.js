@@ -4,8 +4,8 @@ var Schema = mongoose.Schema;
 /**
  * @swagger
  * tags:
- *   name: Actors
- *   description: User management and login
+ *   name: Actor
+ *   description: 
  */
 /**
  * @swagger
@@ -16,13 +16,10 @@ var Schema = mongoose.Schema;
  *       - surname
  *       - email
  *       - password
- *       - preferedLanguage
  *       - phoneNumber
- *       - address
  *       - role
- *       - deleted
- *       - banned
- *       - created
+ *       - banner
+ *       - link
  *     properties:
  *       name:
  *          type: string
@@ -46,6 +43,10 @@ var Schema = mongoose.Schema;
  *          type: boolean
  *       created:
  *          type: date
+ *       banner:
+ *          type: string
+ *       link:
+ *          type: string
  */
 
 var ActorSchema = new Schema({
@@ -98,17 +99,16 @@ var ActorSchema = new Schema({
     created: {
         type: Date,
         default: Date.now
+    },
+    banner: {
+        data: Buffer,
+        contentType: String,
+        required: "Kindly enter a sponsor banner"
+    },
+    link: {
+        contentType: String,
+        required: "Kindly enter a sponsor link"
     }
-    /*,
-        banner: {
-            data: Buffer,
-            contentType: String,
-            required: "Kindly enter a sponsor banner"
-        },
-        link: {
-            contentType: String,
-            required: "Kindly enter a sponsor link"
-        }*/
 }, { strict: false });
 
 function isSponsor() {

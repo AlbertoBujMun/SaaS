@@ -1,41 +1,70 @@
 "use strict";
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-
-var FinderSchema = new Schema(
-  {
+/**
+ * @swagger
+ * tags:
+ *   name: Finder
+ *   description: 
+ */
+/**
+ * @swagger
+ * definitions:
+ *   Finder:
+ *     required:
+ *       - explorer
+ *     properties:
+ *       keyword:
+ *          type: string
+ *       minimumPrice:
+ *          type: Number
+ *       maximumPrice:
+ *          type: Number
+ *       startDate:
+ *          type: date
+ *       endDate:
+ *          type: date
+ *       explorer:
+ *          type: Object
+ *       results:
+ *          type: Object
+ *       lastCached:
+ *          type: date
+ *   
+ */
+var FinderSchema = new Schema({
     keyword: {
-      type: String,
-      default: null
+        type: String,
+        default: null
     },
-    minimumPrice:{
+    minimumPrice: {
         type: Number,
         default: null
-      },
-      maximumPrice:{
+    },
+    maximumPrice: {
         type: Number,
         default: null
-      },
-      startDate:{
+    },
+    startDate: {
         type: Date,
         default: null
-      },
-      endDate: {
+    },
+    endDate: {
         type: Date,
         default: null
-      },
-      explorer: {
+    },
+    explorer: {
         type: Schema.Types.ObjectId,
         required: 'Explorer id is required'
-      },
-      results: [{
+    },
+    results: [{
         type: Schema.Types.ObjectId,
         default: null
-      }],
-      lastCached: {
+    }],
+    lastCached: {
         type: Date,
         default: null
-      }
+    }
 
 
 });

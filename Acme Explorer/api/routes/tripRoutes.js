@@ -1,34 +1,13 @@
 "use strict";
 module.exports = function(app) {
     var trip = require("../controllers/tripController");
-    /**
-     * @swagger
-     * definitions:
-     *   Trips:
-     *     required:
-     *       - username
-     *       - password
-     *     properties:
-     *       username:
-     *         type: string
-     *       password:
-     *         type: string
-     *       path:
-     *         type: string
-     */
 
-    /**
-     * @swagger
-     * tags:
-     *   name: Trips
-     *   description: User management and login
-     */
     /**
      * @swagger
      * /v1/trips:
      *   get:
      *     tags:
-     *       - Trips
+     *       - Trip
      *     description: Returns all actors
      *     produces:
      *       - application/json
@@ -43,7 +22,7 @@ module.exports = function(app) {
      * /v1/trips:
      *   post:
      *     tags:
-     *       - Trips
+     *       - Trip
      *     description: Returns all actors
      *     produces:
      *       - application/json
@@ -62,7 +41,7 @@ module.exports = function(app) {
      * /v1/trips/:tripId:
      *   get:
      *     tags:
-     *       - Trips
+     *       - Trip
      *     description: Returns all actors
      *     produces:
      *       - application/json
@@ -77,7 +56,7 @@ module.exports = function(app) {
      * /v1/trips/:tripId:
      *   put:
      *     tags:
-     *       - Trips
+     *       - Trip
      *     description: Returns all actors
      *     produces:
      *       - application/json
@@ -92,7 +71,7 @@ module.exports = function(app) {
      * /v1/trips/:tripId:
      *   delete:
      *     tags:
-     *       - Trips
+     *       - Trip
      *     description: Returns all actors
      *     produces:
      *       - application/json

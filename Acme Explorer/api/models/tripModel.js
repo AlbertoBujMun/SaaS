@@ -2,97 +2,129 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-var TripStageSchema = new Schema(
-  {
+
+
+var TripStageSchema = new Schema({
     title: {
-      type: String,
-      required: "Title required"
+        type: String,
+        required: "Title required"
     },
     description: {
-      type: String,
-      required: "Stage description required"
+        type: String,
+        required: "Stage description required"
     },
     price: {
-      type: Number,
-      min: 0
+        type: Number,
+        min: 0
     },
     deleted: {
-      type: Boolean,
-      default: false
+        type: Boolean,
+        default: false
     }
-  },
-  { strict: false }
-);
+}, { strict: false });
 
-var TripSchema = new Schema(
-  {
+/**
+ * @swagger
+ * tags:
+ *   name: Trip
+ *   description:
+ */
+/**
+ * @swagger
+ * definitions:
+ *   Trip:
+ *     required:
+ *       - title
+ *       - description
+ *       - startDate
+ *       - endDate
+ *       - manager
+ *     properties:
+ *       ticker:
+ *         type: string
+ *       title:
+ *         type: string
+ *       description:
+ *         type: string
+ *       startDate:
+ *         type: date
+ *       endDate:
+ *         type: date
+ *       photo:
+ *         type: string
+ *       cancelationReason:
+ *         type: boolean
+ *       created:
+ *         type: date
+ *       public:
+ *         type: boolean
+ *       deleted:
+ *         type: boolean 
+ *       manager:
+ *         type: Object
+ */
+var TripSchema = new Schema({
     ticker: {
-      type: String,
-      unique: true
+        type: String,
+        unique: true
     },
     title: {
-      type: String,
-      required: "Kindly enter the title"
+        type: String,
+        required: "Kindly enter the title"
     },
     description: {
-      type: String,
-      required: "Kindly enter the description"
+        type: String,
+        required: "Kindly enter the description"
     },
-    requirement: [
-      {
+    requirement: [{
         type: String,
         required: "Kindly enter the requirement(s)"
-      }
-    ],
+    }],
     startDate: {
-      type: Date,
-      required: "Kindly enter the start date of the trip"
+        type: Date,
+        required: "Kindly enter the start date of the trip"
     },
     endDate: {
-      type: Date,
-      required: "Kindly enter the end date of the trip"
+        type: Date,
+        required: "Kindly enter the end date of the trip"
     },
-    photo: [
-      {
+    photo: [{
         data: Buffer,
         contentType: String
-      }
-    ],
+    }],
     cancelationReason: {
-      type: Boolean,
-      default: false
+        type: Boolean,
+        default: false
     },
     created: {
-      type: Date,
-      default: Date.now
+        type: Date,
+        default: Date.now
     },
     public: {
-      type: Boolean,
-      default: false
+        type: Boolean,
+        default: false
     },
     deleted: {
-      type: Boolean,
-      default: false
+        type: Boolean,
+        default: false
     },
     manager: {
-      type: Schema.Types.ObjectId,
-      required: 'Manager id is required'
+        type: Schema.Types.ObjectId,
+        required: 'Manager id is required'
     },
     tripStage: [TripStageSchema]
-  },
-  { strict: false }
-);
+}, { strict: false });
 
 // Execute before each trip.save() call
 TripSchema.pre("save", function(callback) {
-  var new_trip = this;
-  var day = dateFormat(new Date(), "yymmdd");
+    var new_trip = this;
+    var day = dateFormat(new Date(), "yymmdd");
 
-  var generated_ticker = [day, generate("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 4)].join(
-    "-"
-  );
-  new_trip.ticker = generated_ticker;
-  callback();
+    var generated_ticker = [day, generate("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 4)].join(
+        "-"
+    );
+    new_trip.ticker = generated_ticker;
+    callback();
 });
 
 module.exports = mongoose.model("Trips", TripSchema);
