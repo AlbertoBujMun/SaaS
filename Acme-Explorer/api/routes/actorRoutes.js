@@ -9,51 +9,31 @@ module.exports = function(app) {
      *     tags:
      *       - Actor
      *     summary: Returns all actors
-     *     produces:
-     *       - application/json
-     *     parameters:
-     *       - in: name
-     *         name: name
-     *         description: Name of the actor
-     *         required: true   
-     *       - in: surname
-     *         name: surname
-     *         description: Name of the actor
-     *         required: true
-     *       - in: email
-     *         name: email
-     *         description: Name of the actor
-     *         required: true
-     *       - in: password
-     *         name: password
-     *         description: Name of the actor
-     *         required: true
-     *       - in: preferredLanguage
-     *         name: preferredLanguage
-     *         description: Name of the actor
-     *         required: true
-     *       - in: phoneNumber
-     *         name: phoneNumber
-     *         description: Name of the actor
-     *         required: true
-     *       - in: address
-     *         name: address
-     *         description: Name of the actor
-     *         required: true
-     *     responses:
-     *       200:
-     *         description: An array of actors
-     *         schema:
-     *           $ref: '#/definitions/Actor'
-     *   post:
-     *     tags:
-     *       - Actor
      *     description: Returns all actors
      *     produces:
      *       - application/json
      *     responses:
      *       200:
-     *         description: An array of actors
+     *         description: successful operation
+     *         schema:
+     *           $ref: '#/definitions/Actor'
+     *   post:
+     *     tags:
+     *       - Actor
+     *     summary: Create an actor
+     *     description: Create an actor
+     *     parameters:
+     *       - in: body
+     *         name: body
+     *         description: Create Actor
+     *         required: true
+     *         schema:
+     *             $ref: "#/definitions/Actor"
+     *     produces:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: successful operation
      *         schema:
      *           $ref: '#/definitions/Actor'
      */
@@ -70,34 +50,58 @@ module.exports = function(app) {
      *   get:
      *     tags:
      *       - Actor
+     *     summary: Return the actor specificate with the id
      *     description: Return the actor specificate with the id
      *     produces:
      *       - application/json
+     *     parameters:
+     *       - name: actorId
+     *         in: path
+     *         description: ID of actor to return
+     *         required: true
+     *         type: integer
+     *         format: int64
      *     responses:
      *       200:
-     *         description: An actor
+     *         description: successful operation
      *         schema:
      *           $ref: '#/definitions/Actor'
      *   put:
      *     tags:
      *       - Actor
-     *     description: Returns all actors
+     *     summary: Update an existing Actor
+     *     description: Update an existing Actor
+     *     parameters:
+     *       - in: body
+     *         name: body
+     *         description: Update an Actor
+     *         required: true
+     *         schema:
+     *             $ref: "#/definitions/Actor"
      *     produces:
      *       - application/json
      *     responses:
      *       200:
-     *         description: An array of actors
+     *         description: successful operation
      *         schema:
      *           $ref: '#/definitions/Actor'
      *   delete:
      *     tags:
      *       - Actor
-     *     description: Returns all actors
+     *     summary: Returns an actor deleted
+     *     description: Returns an actor deleted
+     *     parameters:
+     *       - in: actorId
+     *         name: actorId
+     *         description: Delete an Actor
+     *         required: true
+     *         schema:
+     *             $ref: "#/definitions/Actor"
      *     produces:
      *       - application/json
      *     responses:
      *       200:
-     *         description: An array of actors
+     *         description: successful operation
      *         schema:
      *           $ref: '#/definitions/Actor'
      */

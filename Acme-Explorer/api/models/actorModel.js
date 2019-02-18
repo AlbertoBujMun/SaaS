@@ -42,7 +42,8 @@ var Schema = mongoose.Schema;
  *       banned:
  *          type: boolean
  *       created:
- *          type: date
+ *          type: string
+ *          format: date
  *       banner:
  *          type: string
  *       link:
@@ -102,11 +103,11 @@ var ActorSchema = new Schema({
     },
     banner: {
         data: Buffer,
-        contentType: String,
+        type: String,
         required: "Kindly enter a sponsor banner"
     },
     link: {
-        contentType: String,
+        type: String,
         required: "Kindly enter a sponsor link"
     }
 }, { strict: false });

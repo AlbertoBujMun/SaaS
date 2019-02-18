@@ -17,19 +17,22 @@ var Schema = mongoose.Schema;
  *       keyword:
  *          type: string
  *       minimumPrice:
- *          type: Number
+ *          type: number
  *       maximumPrice:
- *          type: Number
+ *          type: number
  *       startDate:
- *          type: date
+ *          type: string
+ *          format: date
  *       endDate:
- *          type: date
+ *          type: string
+ *          format: date
  *       explorer:
- *          type: Object
+ *          type: object
  *       results:
- *          type: Object
+ *          type: object
  *       lastCached:
- *          type: date
+ *          type: string
+ *          format: date
  *   
  */
 var FinderSchema = new Schema({

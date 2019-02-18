@@ -47,21 +47,24 @@ var TripStageSchema = new Schema({
  *       description:
  *         type: string
  *       startDate:
- *         type: date
+ *         type: string
+ *         format: date
  *       endDate:
- *         type: date
+ *         type: string
+ *         format: date
  *       photo:
  *         type: string
  *       cancelationReason:
  *         type: boolean
  *       created:
- *         type: date
+ *         type: string
+ *         format: date
  *       public:
  *         type: boolean
  *       deleted:
  *         type: boolean 
  *       manager:
- *         type: Object
+ *         type: object
  */
 var TripSchema = new Schema({
     ticker: {

@@ -12,7 +12,7 @@ var swaggerDefinition = {
     info: {
         title: 'Acme Explorer API',
         version: '1.0.0',
-        description: 'Demonstrating how to desribe a RESTful API with Swagger',
+        description: 'This is the Acme Explorer API documentation',
     },
     host: 'localhost:' + port,
     basePath: '/api',

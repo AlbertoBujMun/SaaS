@@ -17,11 +17,11 @@ var Schema = mongoose.Schema;
  *       - resultsNumber
  *     properties:
  *       sponsorRate:
- *          type: Number
+ *          type: number
  *       cacheTime:
- *          type: Number
+ *          type: number
  *       resultsNumber:
- *          type: Number
+ *          type: number
  *   
  */
 var SystemInformationSchema = new Schema({

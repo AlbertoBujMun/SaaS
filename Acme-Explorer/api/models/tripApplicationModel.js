@@ -22,9 +22,11 @@ var Schema = mongoose.Schema;
  *       comments:
  *         type: string
  *       applicationDate:
- *         type: date
+ *         type: string
+ *         format: date
  *       rejectionReason:
- *         type: date
+ *         type: string
+ *         format: date
  *       explorer:
  *         type: string
  *      
