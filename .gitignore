@@ -2,3 +2,4 @@
 *.pdf
 node_modules
 package-lock.json
+Diagram.asta.lock
