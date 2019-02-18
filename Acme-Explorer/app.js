@@ -22,7 +22,7 @@ var swaggerDefinition = {
     description: "This is the Acme Explorer API documentation"
   },
   host: "localhost:" + port,
-  basePath: "/api"
+  basePath: ""
 };
 
 // options for the swagger docs
@@ -36,16 +36,16 @@ var options = {
 
 // initialize swagger-jsdoc
 var swaggerSpec = swaggerJSDoc(options);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/v1/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // MongoDB URI building
-var mongoDBUser = process.env.mongoDBUser || "myUser";
-var mongoDBPass = process.env.mongoDBPass || "myUserPassword";
+var mongoDBUser = process.env.mongoDBUser || "adminUser";
+var mongoDBPass = process.env.mongoDBPass || "password";
 var mongoDBCredentials = (mongoDBUser && mongoDBPass) ? mongoDBUser + ":" + mongoDBPass + "@" : "";
 
 var mongoDBHostname = process.env.mongoDBHostname || "localhost";
 var mongoDBPort = process.env.mongoDBPort || "27017";
-var mongoDBName = process.env.mongoDBName || "ACME-EXPLORER";
+var mongoDBName = process.env.mongoDBName || "ACME-Explorer";
 var mongoDBURI =
   "mongodb://" + mongoDBCredentials + mongoDBHostname + ":" + mongoDBPort + "/" + mongoDBName;
 
