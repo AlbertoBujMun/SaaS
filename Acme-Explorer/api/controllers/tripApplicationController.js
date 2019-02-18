@@ -1,7 +1,7 @@
 "use strict";
 /*---------------tripApplication----------------------*/
 var mongoose = require("mongoose"),
-  tripApplication = mongoose.model("tripApplications");
+  tripApplication = mongoose.model("TripApplications");
 
 exports.list_all_tripApplications = function(req, res) {
   tripApplication.find({}, function(err, tripApplication) {
@@ -39,7 +39,7 @@ exports.read_a_tripApplication = function(req, res) {
 };
 
 exports.pay_a_tripApplication = function(req, res) {
-  res.sendStatus(200)
+  res.sendStatus(200);
 };
 
 exports.update_a_tripApplication = function(req, res) {
@@ -79,4 +79,8 @@ exports.delete_a_tripApplication = function(req, res) {
       }
     }
   );
+};
+
+exports.list_an_actor_applications = function(req, res) {
+  res.sendStatus(200);
 };

@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
  * @swagger
  * tags:
  *   name: SystemInformation
- *   description: 
+ *   description:
  */
 /**
  * @swagger
@@ -22,27 +22,24 @@ var Schema = mongoose.Schema;
  *          type: number
  *       resultsNumber:
  *          type: number
- *   
+ *
  */
 var SystemInformationSchema = new Schema({
-    sponsorRate: {
-        type: Number,
-        required: "please state a sponsorship rate"
-    },
-    cacheTime: {
-        type: Number,
-        min: 1,
-        max: 24,
-        required: "please state a cached time"
-    },
-    resultsNumber: {
-        type: Number,
-        maxx: 100,
-        required: "please state a maximum results number"
-    }
-
-
+  sponsorRate: {
+    type: Number,
+    required: "please state a sponsorship rate"
+  },
+  cacheTime: {
+    type: Number,
+    min: 1,
+    max: 24,
+    required: "please state a cached time"
+  },
+  resultsNumber: {
+    type: Number,
+    maxx: 100,
+    required: "please state a maximum results number"
+  }
 });
 
-
-module.exports = mongoose.model("Finders", FinderSchema);
+module.exports = mongoose.model("SystemInformations", SystemInformationSchema);
