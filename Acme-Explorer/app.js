@@ -12,6 +12,8 @@ var express = require("express"),
   swaggerUi = require("swagger-ui-express"),
   app = express();
 
+
+
 // swagger definition
 var swaggerDefinition = {
   info: {
@@ -37,11 +39,15 @@ var swaggerSpec = swaggerJSDoc(options);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // MongoDB URI building
+var mongoDBUser = process.env.mongoDBUser || "myUser";
+var mongoDBPass = process.env.mongoDBPass || "myUserPassword";
+var mongoDBCredentials = (mongoDBUser && mongoDBPass) ? mongoDBUser + ":" + mongoDBPass + "@" : "";
+
 var mongoDBHostname = process.env.mongoDBHostname || "localhost";
 var mongoDBPort = process.env.mongoDBPort || "27017";
 var mongoDBName = process.env.mongoDBName || "ACME-EXPLORER";
 var mongoDBURI =
-  "mongodb://" + mongoDBHostname + ":" + mongoDBPort + "/" + mongoDBName;
+  "mongodb://" + mongoDBCredentials + mongoDBHostname + ":" + mongoDBPort + "/" + mongoDBName;
 
 mongoose.connect(mongoDBURI, {
   reconnectTries: 10,
@@ -71,17 +77,17 @@ routesTrips(app);
 routesTripApplications(app);
 
 console.log("Connecting DB to: " + mongoDBURI);
-mongoose.connection.on("open", function(err, conn) {
-  app.listen(port, function() {
+mongoose.connection.on("open", function (err, conn) {
+  app.listen(port, function () {
     console.log("ACME-EXPORER RESTful API server started on: " + port);
   });
 });
 
-mongoose.connection.on("error", function(err, conn) {
+mongoose.connection.on("error", function (err, conn) {
   console.error("DB init error " + err);
 });
 
-app.get("/swagger.json", function(req, res) {
+app.get("/swagger.json", function (req, res) {
   res.setHeader("Content-Type", "application/json");
   res.send(swaggerSpec);
 });
