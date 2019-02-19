@@ -43,12 +43,11 @@ var SponsorshipSchema = new Schema({
   },
   banner: {
     data: Buffer,
-    contentType: String,
-    required: [isSponsor, "Kindly enter a sponsor banner"]
+    contentType: String
   },
   link: {
     type: String,
-    required: [isSponsor, "Kindly enter a sponsor link"]
+    required: "Kindly enter a sponsor link"
   }
 });
 

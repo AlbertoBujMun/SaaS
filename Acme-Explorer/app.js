@@ -12,8 +12,6 @@ var express = require("express"),
   swaggerUi = require("swagger-ui-express"),
   app = express();
 
-
-
 // swagger definition
 var swaggerDefinition = {
   info: {
@@ -41,13 +39,20 @@ app.use("/v1/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // MongoDB URI building
 var mongoDBUser = process.env.mongoDBUser || "adminUser";
 var mongoDBPass = process.env.mongoDBPass || "password";
-var mongoDBCredentials = (mongoDBUser && mongoDBPass) ? mongoDBUser + ":" + mongoDBPass + "@" : "";
+var mongoDBCredentials =
+  mongoDBUser && mongoDBPass ? mongoDBUser + ":" + mongoDBPass + "@" : "";
 
 var mongoDBHostname = process.env.mongoDBHostname || "localhost";
 var mongoDBPort = process.env.mongoDBPort || "27017";
 var mongoDBName = process.env.mongoDBName || "ACME-Explorer";
 var mongoDBURI =
-  "mongodb://" + mongoDBCredentials + mongoDBHostname + ":" + mongoDBPort + "/" + mongoDBName;
+  "mongodb://" +
+  mongoDBCredentials +
+  mongoDBHostname +
+  ":" +
+  mongoDBPort +
+  "/" +
+  mongoDBName;
 
 mongoose.connect(mongoDBURI, {
   reconnectTries: 10,
@@ -57,6 +62,7 @@ mongoose.connect(mongoDBURI, {
   socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
   family: 4, // skip trying IPv6
   useNewUrlParser: true
+  /* , autoIndex: false */
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -77,17 +83,17 @@ routesTrips(app);
 routesTripApplications(app);
 
 console.log("Connecting DB to: " + mongoDBURI);
-mongoose.connection.on("open", function (err, conn) {
-  app.listen(port, function () {
+mongoose.connection.on("open", function(err, conn) {
+  app.listen(port, function() {
     console.log("ACME-EXPORER RESTful API server started on: " + port);
   });
 });
 
-mongoose.connection.on("error", function (err, conn) {
+mongoose.connection.on("error", function(err, conn) {
   console.error("DB init error " + err);
 });
 
-app.get("/swagger.json", function (req, res) {
+app.get("/swagger.json", function(req, res) {
   res.setHeader("Content-Type", "application/json");
   res.send(swaggerSpec);
 });
