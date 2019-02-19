@@ -103,24 +103,10 @@ var ActorSchema = new Schema(
     created: {
       type: Date,
       default: Date.now
-    },
-    banner: {
-      type: String,
-      data: Buffer,
-      contentType: String,
-      required: [isSponsor, "Kindly enter a sponsor banner"]
-    },
-    link: {
-      type: String,
-      required: [isSponsor, "Kindly enter a sponsor link"]
     }
   },
   { strict: false }
 );
-
-function isSponsor() {
-  return this.role === "SPONSOR";
-}
 
 ActorSchema.pre("save", function(callback) {
   var actor = this;

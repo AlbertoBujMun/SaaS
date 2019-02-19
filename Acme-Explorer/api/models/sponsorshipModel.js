@@ -40,6 +40,15 @@ var SponsorshipSchema = new Schema({
   paymentDate: {
     type: Date,
     default: null
+  },
+  banner: {
+    data: Buffer,
+    contentType: String,
+    required: [isSponsor, "Kindly enter a sponsor banner"]
+  },
+  link: {
+    type: String,
+    required: [isSponsor, "Kindly enter a sponsor link"]
   }
 });
 

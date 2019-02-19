@@ -70,3 +70,7 @@ exports.delete_a_trip = function(req, res) {
     }
   );
 };
+
+exports.list_an_actor_trips = function(req, res) {
+  res.sendStatus(200);
+};

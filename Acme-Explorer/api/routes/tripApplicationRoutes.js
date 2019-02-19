@@ -111,6 +111,6 @@ module.exports = function(app) {
    *           $ref: '#/definitions/TripApplication'
    */
   app
-    .route("/v1/tripApplications/list/:actorId")
-    .get(tripApplication.pay_a_tripApplication);
+    .route("/v1/myTripApplications")
+    .get(tripApplication.list_an_actor_applications);
 };

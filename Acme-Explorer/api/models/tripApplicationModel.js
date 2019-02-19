@@ -33,15 +33,6 @@ var Schema = mongoose.Schema;
  */
 var TripApplicationSchema = new Schema(
   {
-    ticker: {
-      type: String,
-      validate: {
-        validator: function(v) {
-          return /\d{6}-[A-Z]{4}/.test(v);
-        },
-        message: 'ticker is not valid!, Pattern("d{6}-[A-Z]{4}")'
-      }
-    },
     status: {
       type: String,
       default: "PENDING",
@@ -61,10 +52,18 @@ var TripApplicationSchema = new Schema(
     explorer: {
       type: Schema.Types.ObjectId,
       required: "Explorer id is required"
+    },
+    trip: {
+      type: Schema.Types.ObjectId,
+      required: "Trip id is required"
     }
   },
   { strict: false }
 );
+
+TripApplicationSchema.index({ status });
+TripApplicationSchema.index({ explorer });
+TripApplicationSchema.index({ applicationDate });
 
 function isRejected() {
   return this.status === "REJECTED";

@@ -42,19 +42,29 @@ var FinderSchema = new Schema({
   },
   minimumPrice: {
     type: Number,
-    default: null
+    default: null,
+    validate: [
+      isLowerThan,
+      "The minimum price must be lower than the maximum price"
+    ]
   },
   maximumPrice: {
     type: Number,
-    default: null
+    default: null,
+    validate: [
+      isGreaterThan,
+      "The maximum price must be greater than the minimum price"
+    ]
   },
   startDate: {
     type: Date,
-    default: null
+    default: null,
+    validate: [isEarlierThan, "The start date must be before the end date"]
   },
   endDate: {
     type: Date,
-    default: null
+    default: null,
+    validate: [isLaterThan, "The end date must be after the start date"]
   },
   explorer: {
     type: Schema.Types.ObjectId,
@@ -71,5 +81,53 @@ var FinderSchema = new Schema({
     default: null
   }
 });
+
+function isGreaterThan(finder) {
+  if (
+    finder.minimumPrice != null &&
+    finder.maximumPrice != null &&
+    finder.minimumPrice > finder.maximumPrice
+  ) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function isLowerThan(finder) {
+  if (
+    finder.minimumPrice != null &&
+    finder.maximumPrice != null &&
+    finder.maximumPrice < finder.minimumPrice
+  ) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function isEarlierThan(finder) {
+  if (
+    finder.startDate != null &&
+    finder.endDate != null &&
+    finder.startDate > finder.endDate
+  ) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function isLaterThan(finder) {
+  if (
+    finder.startDate != null &&
+    finder.endDate != null &&
+    finder.endDate < finder.startDate
+  ) {
+    return false;
+  } else {
+    return true;
+  }
+}
 
 module.exports = mongoose.model("Finders", FinderSchema);
