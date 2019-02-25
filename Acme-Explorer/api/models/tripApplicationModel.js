@@ -61,9 +61,9 @@ var TripApplicationSchema = new Schema(
   { strict: false }
 );
 
-TripApplicationSchema.index({ status });
-TripApplicationSchema.index({ explorer });
-TripApplicationSchema.index({ applicationDate });
+TripApplicationSchema.index({ status: 1 });
+TripApplicationSchema.index({ explorer: 1 });
+TripApplicationSchema.index({ applicationDate: 1 });
 
 function isRejected() {
   return this.status === "REJECTED";

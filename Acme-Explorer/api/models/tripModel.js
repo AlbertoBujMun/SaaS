@@ -127,13 +127,13 @@ var TripSchema = new Schema(
 );
 
 TripSchema.index({ "tripStage.price": 1 });
-TripSchema.index({ startDate });
-TripSchema.index({ endDate });
-TripSchema.index({ created });
+TripSchema.index({ startDate: 1 });
+TripSchema.index({ endDate: 1 });
+TripSchema.index({ created: 1 });
 TripSchema.index({ title: "text", description: "text", ticker: "text" });
 
 // Execute before each trip.save() call
-TripSchema.pre("save", function(callback) {
+TripSchema.pre("save", function (callback) {
   var new_trip = this;
   var day = dateFormat(new Date(), "yymmdd");
 
