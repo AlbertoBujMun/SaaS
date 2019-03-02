@@ -89,127 +89,215 @@ function createDataWareHouseJob() {
 
 module.exports.createDataWareHouseJob = createDataWareHouseJob;
 
-function computeTopCancellers(callback) {
-    Orders.aggregate([
-        { $match: { cancelationMoment: { $exists: true } } },
+function computeApplicationsRatioByStatus(callback) {
+    TripApplications.aggregate([
+        { "$group": { "_id": "$status", "count": { "$sum": 1 } } },
         {
-            $facet: {
-                preComputation: [
-                    { $group: { _id: "$consumer", ordersCanceled: { $sum: 1 } } },
-                    { $group: { _id: null, nCanceladores: { $sum: 1 } } },
-                    { $project: { _id: 0, limitTopPercentage: { $ceil: { $multiply: ["$nCanceladores", 0.1] } } } }
-                ],
-                canceladores: [{ $project: { _id: 0, consumer: 1 } }, { $group: { _id: "$consumer", ordersCanceled: { $sum: 1 } } }, { $sort: { "ordersCanceled": -1 } }]
+            "$project": {
+                "count": 1,
+                "percentage": {
+                    "$concat": [{ "$substr": [{ "$multiply": [{ "$divide": ["$count", { "$literal": TripApplications.count() }] }, 100] }, 0, 2] }, "", "%"]
+                }
             }
-        },
-        { $project: { topCanceladores: { $slice: ["$canceladores", { $arrayElemAt: ["$preComputation.limitTopPercentage", 0] }] } } }
-    ], function (err, res) {
-        callback(err, res[0].topCanceladores)
-    });
+        }
+    ]);
 };
 
-function computeTopNotCancellers(callback) {
-    Orders.aggregate([
-        { $match: { cancelationMoment: { $exists: false } } },
-        {
-            $facet: {
-                preComputation: [
-                    { $group: { _id: "$consumer", ordersNotCanceled: { $sum: 1 } } },
-                    { $group: { _id: null, nNoCanceladores: { $sum: 1 } } },
-                    { $project: { _id: 0, limitTopPercentage: { $ceil: { $multiply: ["$nNoCanceladores", 0.1] } } } }
-                ],
-                noCanceladores: [{ $project: { _id: 0, consumer: 1 } }, { $group: { _id: "$consumer", ordersNotCanceled: { $sum: 1 } } }, { $sort: { "ordersNotCanceled": -1 } }]
-            }
-        },
-        { $project: { topNoCanceladores: { $slice: ["$noCanceladores", { $arrayElemAt: ["$preComputation.limitTopPercentage", 0] }] } } }
-    ], function (err, res) {
-        callback(err, res[0].topNoCanceladores)
-    });
+function computeAverageFinderPrices(callback) {
+    Finders.aggregate([
+        { $project: { _id: 1, "avgMinimumPrice": { "$avg": "$minimumPrice" }, "avgMaximumPrice": { "$avg": "$maximumPrice" } } }
+    ]);
 };
 
-function computeBottomNotCancellers(callback) {
-    Orders.aggregate([
-        { $match: { cancelationMoment: { $exists: false } } },
-        {
-            $facet: {
-                preComputation: [
-                    { $group: { _id: "$consumer", ordersNotCanceled: { $sum: 1 } } },
-                    { $group: { _id: null, nNoCanceladores: { $sum: 1 } } },
-                    { $project: { _id: 0, limitTopPercentage: { $ceil: { $multiply: ["$nNoCanceladores", 0.1] } } } }
-                ],
-                noCanceladores: [{ $project: { _id: 0, consumer: 1 } }, { $group: { _id: "$consumer", ordersNotCanceled: { $sum: 1 } } }, { $sort: { "ordersNotCanceled": 1 } }]
-            }
-        },
-        { $project: { bottomNoCanceladores: { $slice: ["$noCanceladores", { $arrayElemAt: ["$preComputation.limitTopPercentage", 0] }] } } }
-    ], function (err, res) {
-        callback(err, res[0].bottomNoCanceladores)
-    });
+function computeMostCommonKeywordsFinder(callback) {
+    Finders.aggregate([
+        { $sortByCount: "$keyword" },
+        { $limit: 10 }
+    ]);
 };
 
-function computeTopClerks(callback) {
-    Orders.aggregate([
-        { $match: { deliveryMoment: { $exists: true } } },
+function computeTripsAggregation(callback) {
+    Trips.aggregate([
         {
-            $facet: {
-                preComputation: [
-                    { $group: { _id: "$clerk", ordersDelivered: { $sum: 1 } } },
-                    { $group: { _id: null, nDeliverers: { $sum: 1 } } },
-                    { $project: { _id: 0, limitTopPercentage: { $ceil: { $multiply: ["$nDeliverers", 0.1] } } } }
-                ],
-                deliverers: [{ $project: { _id: 0, clerk: 1 } }, { $group: { _id: "$clerk", ordersDelivered: { $sum: 1 } } }, { $sort: { "ordersDelivered": -1 } }]
+            "$group": {
+                "_id": "$managerId",
+                "tripsManaged": {
+                    "$sum": 1.0
+                }
             }
         },
-        { $project: { topDeliverers: { $slice: ["$deliverers", { $arrayElemAt: ["$preComputation.limitTopPercentage", 0] }] } } }
-    ], function (err, res) {
-        callback(err, res[0].topDeliverers)
-    });
+        {
+            "$facet": {
+                "avgTrips": [
+                    {
+                        "$project": {
+                            "_id": 0.0,
+                            "data": {
+                                "$avg": "$tripsManaged"
+                            }
+                        }
+                    }
+                ],
+                "minTrips": [
+                    {
+                        "$project": {
+                            "_id": 0.0,
+                            "data": {
+                                "$min": "$tripsManaged"
+                            }
+                        }
+                    }
+                ],
+                "maxTrips": [
+                    {
+                        "$project": {
+                            "_id": 0.0,
+                            "data": {
+                                "$max": "$tripsManaged"
+                            }
+                        }
+                    }
+                ],
+                "stdevTrips": [
+                    {
+                        "$project": {
+                            "_id": 0.0,
+                            "data": {
+                                "$stdDevPop": "$tripsManaged"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+        {
+            "allowDiskUse": false
+        }
+    );
+
 };
 
-function computeBottomClerks(callback) {
-    Orders.aggregate([
-        { $match: { deliveryMoment: { $exists: true } } },
-        {
-            $facet: {
-                preComputation: [
-                    { $group: { _id: "$clerk", ordersDelivered: { $sum: 1 } } },
-                    { $group: { _id: null, nDeliverers: { $sum: 1 } } },
-                    { $project: { _id: 0, limitTopPercentage: { $ceil: { $multiply: ["$nDeliverers", 0.1] } } } }
-                ],
-                deliverers: [{ $project: { _id: 0, clerk: 1 } }, { $group: { _id: "$clerk", ordersDelivered: { $sum: 1 } } }, { $sort: { "ordersDelivered": 1 } }]
+function computePricesAggregation(callback) {
+    Trips.aggregate(
+        [
+            { "$unwind": "$tripStages" },
+            {
+                "$project": {
+                    _id: 1,
+                    precio: { $sum: "$tripStages.price" }
+                }
+            },
+            {
+                "$facet": {
+                    "avgTrips": [
+                        {
+                            "$project": {
+                                "_id": 0,
+                                "data": {
+                                    "$avg": "$precio"
+                                }
+                            }
+                        }
+                    ],
+                    "minTrips": [
+                        {
+                            "$project": {
+                                "_id": 0,
+                                "data": {
+                                    "$min": "$precio"
+                                }
+                            }
+                        }
+                    ],
+                    "maxTrips": [
+                        {
+                            "$project": {
+                                "_id": 0,
+                                "data": {
+                                    "$max": "$precio"
+                                }
+                            }
+                        }
+                    ],
+                    "stdevTrips": [
+                        {
+                            "$project": {
+                                "_id": 0,
+                                "data": {
+                                    "$stdDevPop": "$precio"
+                                }
+                            }
+                        }
+                    ]
+                }
             }
-        },
-        { $project: { bottomDeliverers: { $slice: ["$deliverers", { $arrayElemAt: ["$preComputation.limitTopPercentage", 0] }] } } }
-    ], function (err, res) {
-        callback(err, res[0].bottomDeliverers)
-    });
+        ],
+        {
+            "allowDiskUse": false
+        }
+    );
 };
 
-function computeRatioCancelledOrders(callback) {
-    Orders.aggregate([
-        {
-            $project: {
-                "placementMonth": { "$month": "$placementMoment" },
-                "placementYear": { "$year": "$placementMoment" },
-                "cancelationMoment": 1
+function computeAggregateTripApplications(callback) {
+    TripApplications.aggregate(
+        [
+            {
+                "$group": {
+                    "_id": "$tripId",
+                    "applicationsPerTrip": {
+                        "$sum": 1.0
+                    }
+                }
+            },
+            {
+                "$facet": {
+                    "avgTrips": [
+                        {
+                            "$project": {
+                                "_id": 0.0,
+                                "data": {
+                                    "$avg": "$applicationsPerTrip"
+                                }
+                            }
+                        }
+                    ],
+                    "minTrips": [
+                        {
+                            "$project": {
+                                "_id": 0.0,
+                                "data": {
+                                    "$min": "$applicationsPerTrip"
+                                }
+                            }
+                        }
+                    ],
+                    "maxTrips": [
+                        {
+                            "$project": {
+                                "_id": 0.0,
+                                "data": {
+                                    "$max": "$applicationsPerTrip"
+                                }
+                            }
+                        }
+                    ],
+                    "stdevTrips": [
+                        {
+                            "$project": {
+                                "_id": 0.0,
+                                "data": {
+                                    "$stdDevPop": "$applicationsPerTrip"
+                                }
+                            }
+                        }
+                    ]
+                }
             }
-        },
+        ],
         {
-            $match: {
-                "placementMonth": new Date().getMonth() + 1,
-                "placementYear": new Date().getFullYear()
-            }
-        },
-        {
-            $facet: {
-                totalOrdersCurrentMonth: [{ $group: { _id: null, totalOrders: { $sum: 1 } } }],
-                totalCancelledOrdersCurrentMonth: [
-                    { $match: { "cancelationMoment": { $exists: true } } },
-                    { $group: { _id: null, totalOrders: { $sum: 1 } } }]
-            }
-        },
+            "allowDiskUse": false
+        }
+    );
 
-        { $project: { _id: 0, ratioOrdersCancelledCurrentMont: { $divide: [{ $arrayElemAt: ["$totalCancelledOrdersCurrentMonth.totalOrders", 0] }, { $arrayElemAt: ["$totalOrdersCurrentMonth.totalOrders", 0] }] } } }
-    ], function (err, res) {
-        callback(err, res[0].ratioOrdersCancelledCurrentMont)
-    });
 };
