@@ -82,6 +82,10 @@ var FinderSchema = new Schema({
   }
 });
 
+FinderSchema.index({ explorer: 1 });
+FinderSchema.index({ maximumPrice: 1 });
+FinderSchema.index({ minimumPrice: 1 });
+
 function isGreaterThan(finder) {
   if (
     finder.minimumPrice != null &&

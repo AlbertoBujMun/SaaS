@@ -27,7 +27,7 @@ var SponsorshipSchema = new Schema({
   ticker: {
     type: String,
     validate: {
-      validator: function(v) {
+      validator: function (v) {
         return /\d{6}-[A-Z]{4}/.test(v);
       },
       message: 'ticker is not valid!, Pattern("d{6}-[A-Z]{4}")'
@@ -50,5 +50,7 @@ var SponsorshipSchema = new Schema({
     required: "Kindly enter a sponsor link"
   }
 });
+
+SponsorshipSchema.index({ sponsor: 1 });
 
 module.exports = mongoose.model("Sponsorships", SponsorshipSchema);
