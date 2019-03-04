@@ -102,8 +102,7 @@ var TripSchema = new Schema(
       }
     ],
     cancelationReason: {
-      type: Boolean,
-      default: false
+      type: String
     },
     created: {
       type: Date,
