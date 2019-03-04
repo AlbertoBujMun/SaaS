@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function (app) {
+module.exports = function(app) {
     var actors = require("../controllers/actorController");
 
     /**
@@ -32,10 +32,18 @@ module.exports = function (app) {
      *     produces:
      *       - application/json
      *     responses:
-     *       200:
-     *         description: successful operation
-     *         schema:
-     *           $ref: '#/definitions/Actor'
+     *          '200':
+     *              description: OK
+     *          '400':
+     *              description: Bad request. User ID must be an integer and larger than 0.
+     *          '401':
+     *              description: Authorization information is missing or invalid.
+     *          '404':
+     *              description: A user with the specified ID was not found.
+     *          '5XX':
+     *              description: Unexpected error.
+     *          schema:
+     *              $ref: '#/definitions/Actor'
      */
     app
         .route("/v1/actors")
@@ -46,7 +54,7 @@ module.exports = function (app) {
 
     /**
      * @swagger
-     * /v1/actors/:actorId:
+     * /v1/actors/{actorId}:
      *   get:
      *     tags:
      *       - Actor
@@ -55,12 +63,12 @@ module.exports = function (app) {
      *     produces:
      *       - application/json
      *     parameters:
-     *       - name: actorId
-     *         in: path
+     *       - in: path
+     *         name: actorId
      *         description: ID of actor to return
      *         required: true
-     *         type: integer
-     *         format: int64
+     *         schema:
+     *           type: string
      *     responses:
      *       200:
      *         description: successful operation
@@ -72,6 +80,11 @@ module.exports = function (app) {
      *     summary: Update an existing Actor
      *     description: Update an existing Actor
      *     parameters:
+     *       - in: path
+     *         name: actorId
+     *         description: Update an Actor
+     *         required: true
+     *         type: string
      *       - in: body
      *         name: body
      *         description: Update an Actor
@@ -91,10 +104,11 @@ module.exports = function (app) {
      *     summary: Returns an actor deleted
      *     description: Returns an actor deleted
      *     parameters:
-     *       - in: actorId
+     *       - in: path
      *         name: actorId
      *         description: Delete an Actor
      *         required: true
+     *         type: string
      *         schema:
      *             $ref: "#/definitions/Actor"
      *     produces:
