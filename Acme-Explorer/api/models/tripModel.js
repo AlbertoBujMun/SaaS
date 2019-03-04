@@ -126,6 +126,14 @@ var TripSchema = new Schema(
   { strict: false }
 );
 
+TripSchema.virtual("price").get(function () {
+  var i = 0;
+  this.tripStage.forEach(function (x) {
+    i = i + x.price
+  })
+  return i;
+});
+
 TripSchema.index({ "tripStage.price": 1 });
 TripSchema.index({ startDate: 1 });
 TripSchema.index({ endDate: 1 });

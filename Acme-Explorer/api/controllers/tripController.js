@@ -1,10 +1,11 @@
 "use strict";
 /*---------------TRIP----------------------*/
 var mongoose = require("mongoose"),
-  Trip = mongoose.model("Trips");
+  Trip = mongoose.model("Trips"),
+  Finder = mongoose.model("Finders");
 
-exports.list_all_trips = function(req, res) {
-  Trip.find({}, function(err, trip) {
+exports.list_all_trips = function (req, res) {
+  Trip.find({}, function (err, trip) {
     if (err) {
       res.send(err);
     } else {
@@ -13,10 +14,10 @@ exports.list_all_trips = function(req, res) {
   });
 };
 
-exports.create_a_trip = function(req, res) {
+exports.create_a_trip = function (req, res) {
   var new_trip = new Trip(req.body);
 
-  new_trip.save(function(error, trip) {
+  new_trip.save(function (error, trip) {
     if (error) {
       res.send(error);
     } else {
@@ -25,8 +26,8 @@ exports.create_a_trip = function(req, res) {
   });
 };
 
-exports.read_a_trip = function(req, res) {
-  Trip.findById(req.params.tripId, function(err, trip) {
+exports.read_a_trip = function (req, res) {
+  Trip.findById(req.params.tripId, function (err, trip) {
     if (err) {
       res.send(err);
     } else {
@@ -35,8 +36,8 @@ exports.read_a_trip = function(req, res) {
   });
 };
 
-exports.update_a_trip = function(req, res) {
-  Trip.findById(req.params.tripId, function(err, trip) {
+exports.update_a_trip = function (req, res) {
+  Trip.findById(req.params.tripId, function (err, trip) {
     if (err) {
       res.send(err);
     } else {
@@ -44,7 +45,7 @@ exports.update_a_trip = function(req, res) {
         { _id: req.params.tripId },
         req.body,
         { new: true },
-        function(err, trip) {
+        function (err, trip) {
           if (err) {
             res.send(err);
           } else {
@@ -56,12 +57,12 @@ exports.update_a_trip = function(req, res) {
   });
 };
 
-exports.delete_a_trip = function(req, res) {
+exports.delete_a_trip = function (req, res) {
   Trip.remove(
     {
       _id: req.params.tripId
     },
-    function(err, trip) {
+    function (err, trip) {
       if (err) {
         res.send(err);
       } else {
@@ -71,6 +72,76 @@ exports.delete_a_trip = function(req, res) {
   );
 };
 
-exports.list_an_actor_trips = function(req, res) {
+exports.list_an_actor_trips = function (req, res) {
   res.sendStatus(200);
 };
+
+//Receives Finder id
+exports.search_trips = function (req, res) {
+  //In further version of the code we will:
+  //1.- control the authorization in order to include deleted items in the results if the requester is an Administrator.
+  var query = {};
+
+  Finder.findById(req.params.FinderId, function (err, Finder) {
+    if (err) {
+      res.send(err);
+    }
+    else {
+      finder = Finder;
+    }
+  });
+
+  if (finder.keyword) {
+    query.$text = { $search: finder.keyword };
+  }
+  if (finder.minimumPrice) {
+    query.price = { $gte: finder.minimumPrice }
+  }
+  if (finder.maximumPrice) {
+    query.price = { $lte: finder.maximumPrice }
+  }
+  if (finder.startDate) {
+    query.startDate = finder.startDate;
+  }
+  if (finder.endDate) {
+    query.endDate = finder.endDate;
+  }
+
+  query.deleted = false;
+
+  var skip = 0;
+  if (req.query.startFrom) {
+    skip = parseInt(req.query.startFrom);
+  }
+  var limit = 0;
+  if (req.query.pageSize) {
+    limit = parseInt(req.query.pageSize);
+  }
+
+  var sort = "";
+  if (req.query.reverse == "true") {
+    sort = "-";
+  }
+  if (req.query.sortedBy) {
+    sort += req.query.sortedBy;
+  }
+
+  console.log("Query: " + query + " Skip:" + skip + " Limit:" + limit + " Sort:" + sort);
+
+  Trip.find(query)
+    .sort(sort)
+    .skip(skip)
+    .limit(limit)
+    .lean()
+    .exec(function (err, trip) {
+      console.log('Start searching trips');
+      if (err) {
+        res.send(err);
+      }
+      else {
+        res.json(trip);
+      }
+      console.log('End searching trips');
+    });
+};
+
