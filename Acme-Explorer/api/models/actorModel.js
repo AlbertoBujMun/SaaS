@@ -40,8 +40,10 @@ var bcrypt = require('bcrypt');
  *          type: string
  *       deleted:
  *          type: boolean
+ *          default: false
  *       banned:
  *          type: boolean
+ *          default: false
  *       created:
  *          type: string
  *          format: date
