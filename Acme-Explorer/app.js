@@ -10,7 +10,14 @@ var express = require("express"),
     bodyParser = require("body-parser"),
     swaggerJSDoc = require("swagger-jsdoc"),
     swaggerUi = require("swagger-ui-express"),
+    fs = require('fs'),
+    https = require('https'),
     app = express();
+
+const options = {
+    key: fs.readFileSync('server.key'),
+    cert: fs.readFileSync('server.cert')
+}
 
 // swagger definition
 var swaggerDefinitionv1 = {
@@ -120,10 +127,12 @@ routesTripApplicationsv2(app);
 
 console.log("Connecting DB to: " + mongoDBURI);
 mongoose.connection.on("open", function (err, conn) {
-    app.listen(port, function () {
+    app.listen(8000, function () {
         console.log("ACME-EXPORER RESTful API server started on: " + port);
     });
+    https.createServer(options, app).listen(port);
 });
+
 
 mongoose.connection.on("error", function (err, conn) {
     console.error("DB init error " + err);
