@@ -3,8 +3,8 @@
 var mongoose = require("mongoose"),
   tripApplication = mongoose.model("TripApplications");
 
-exports.list_all_tripApplications = function(req, res) {
-  tripApplication.find({}, function(err, tripApplication) {
+exports.list_all_tripApplications = function (req, res) {
+  tripApplication.find({}, function (err, tripApplication) {
     if (err) {
       res.send(err);
     } else {
@@ -13,10 +13,10 @@ exports.list_all_tripApplications = function(req, res) {
   });
 };
 
-exports.create_a_tripApplication = function(req, res) {
+exports.create_a_tripApplication = function (req, res) {
   var new_tripApplication = new tripApplication(req.body);
 
-  new_tripApplication.save(function(error, tripApplication) {
+  new_tripApplication.save(function (error, tripApplication) {
     if (error) {
       res.send(error);
     } else {
@@ -25,8 +25,8 @@ exports.create_a_tripApplication = function(req, res) {
   });
 };
 
-exports.read_a_tripApplication = function(req, res) {
-  TripApplication.findById(req.params.tripApplicationId, function(
+exports.read_a_tripApplication = function (req, res) {
+  TripApplication.findById(req.params.tripApplicationId, function (
     err,
     tripApplication
   ) {
@@ -38,12 +38,12 @@ exports.read_a_tripApplication = function(req, res) {
   });
 };
 
-exports.pay_a_tripApplication = function(req, res) {
+exports.pay_a_tripApplication = function (req, res) {
   res.sendStatus(200);
 };
 
-exports.update_a_tripApplication = function(req, res) {
-  TripApplication.findById(req.params.tripApplicationId, function(
+exports.update_a_tripApplication = function (req, res) {
+  TripApplication.findById(req.params.tripApplicationId, function (
     err,
     tripApplication
   ) {
@@ -54,7 +54,7 @@ exports.update_a_tripApplication = function(req, res) {
         { _id: req.params.tripApplicationId },
         req.body,
         { new: true },
-        function(err, tripApplication) {
+        function (err, tripApplication) {
           if (err) {
             res.send(err);
           } else {
@@ -66,12 +66,12 @@ exports.update_a_tripApplication = function(req, res) {
   });
 };
 
-exports.delete_a_tripApplication = function(req, res) {
+exports.delete_a_tripApplication = function (req, res) {
   TripApplication.remove(
     {
       _id: req.params.tripApplicationId
     },
-    function(err, tripApplication) {
+    function (err, tripApplication) {
       if (err) {
         res.send(err);
       } else {
@@ -81,6 +81,18 @@ exports.delete_a_tripApplication = function(req, res) {
   );
 };
 
-exports.list_an_actor_applications = function(req, res) {
+exports.list_an_actor_applications = function (req, res) {
+  res.sendStatus(200);
+};
+
+exports.reject_trip_application = function (req, res) {
+  res.sendStatus(200);
+};
+
+exports.due_trip_application = function (req, res) {
+  res.sendStatus(200);
+};
+
+exports.cancel_trip_application = function (req, res) {
   res.sendStatus(200);
 };

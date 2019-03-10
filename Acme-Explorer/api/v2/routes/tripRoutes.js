@@ -8,14 +8,14 @@ module.exports = function (app) {
      *   get:
      *     tags:
      *       - Trip
-     *     description: Returns all actors
+     *     description: Returns all trips
      *     produces:
      *       - application/json
      *     responses:
      *       200:
-     *         description: An array of actors
+     *         description: An array of trips
      *         schema:
-     *           $ref: '#/definitions/actors'
+     *           $ref: '#/definitions/Trip'
      */
     /**
      * @swagger
@@ -43,6 +43,60 @@ module.exports = function (app) {
         .route("/v2/trips")
         .get(trip.list_all_trips)
         .post(trip.create_a_trip);
+    /**
+         * @swagger
+         * /v2/trips/myTrips:
+         *   get:
+         *     tags:
+         *       - Trip
+         *     description: Returns all trips an actor is enroled into
+         *     produces:
+         *       - application/json
+         *     responses:
+         *       200:
+         *         description: An array of trips
+         *         schema:
+         *           $ref: '#/definitions/Trip'
+         */
+    app.route("/v2/trips/myTrips").get(trip.list_an_actor_trips);
+
+    /**
+            * @swagger
+            * /v2/trips/simpleSearch/:keyword:
+            *   get:
+            *     tags:
+            *       - Trip
+            *     description: Returns all trips containing a keyword
+            *     produces:
+            *       - application/json
+            *     responses:
+            *       200:
+            *         description: An array of trips
+            *         schema:
+            *           $ref: '#/definitions/Trip'
+            */
+    app.route("/v2/trips/simpleSearch/:keyword").get(trip.list_trips_by_keyword);
+
+    /**
+           * @swagger
+           * /v2/trips/advancedSearch/:finderId:
+           *   get:
+           *     tags:
+           *       - Trip
+           *     description: Returns all trips filtering by a finder
+           *     produces:
+           *       - application/json
+           *     responses:
+           *       200:
+           *         description: An array of trips
+           *         schema:
+           *           $ref: '#/definitions/Trip'
+           */
+    app.route("/v2/trips/advancedSearch/:finderId").get(trip.search_trips);
+
+
+
+
     /**
      * @swagger
      * /v2/trips/:tripId:
@@ -79,12 +133,12 @@ module.exports = function (app) {
      *   delete:
      *     tags:
      *       - Trip
-     *     description: Returns all actors
+     *     description: Delete a trip
      *     produces:
      *       - application/json
      *     responses:
      *       200:
-     *         description: An array of actors
+     *         description: returns the trip deleted
      *         schema:
      *           $ref: '#/definitions/Trip'
      */
@@ -94,5 +148,22 @@ module.exports = function (app) {
         .put(trip.update_a_trip)
         .delete(trip.delete_a_trip);
 
-    app.route("/v2/myTrips").get(trip.list_an_actor_trips);
+
+    /**
+* @swagger
+* /v2/trips/cancel/:tripId:
+*   get:
+*     tags:
+*       - Trip
+*     description: Sets a trip status to CANCELED
+*     produces:
+*       - application/json
+*     responses:
+*       200:
+*         description: The canceled trip application
+*         schema:
+*           $ref: '#/definitions/Trip'
+*/
+    app.route("/v2/trips/cancel/:tripId").get(trip.cancel_trip);
+
 };

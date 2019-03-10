@@ -34,6 +34,57 @@ module.exports = function (app) {
     .post(tripApplication.create_a_tripApplication);
 
   /**
+         * @swagger
+         * /v2/tripApplications/reject/:tripApplicationId:
+         *   get:
+         *     tags:
+         *       - Trip
+         *     description: Sets a tripApplication status to REJECTED
+         *     produces:
+         *       - application/json
+         *     responses:
+         *       200:
+         *         description: The rejected trip application
+         *         schema:
+         *           $ref: '#/definitions/TripApplication'
+         */
+  app.route("/v2/tripApplications/reject/:tripApplicationId").get(tripApplication.reject_trip_application);
+
+  /**
+       * @swagger
+       * /v2/tripApplications/due/:tripApplicationId:
+       *   get:
+       *     tags:
+       *       - Trip
+       *     description: Sets a tripApplication status to DUE
+       *     produces:
+       *       - application/json
+       *     responses:
+       *       200:
+       *         description: The due trip application
+       *         schema:
+       *           $ref: '#/definitions/TripApplication'
+       */
+  app.route("/v2/tripApplications/due/:tripApplicationId").get(tripApplication.due_trip_application);
+
+  /**
+ * @swagger
+ * /v2/tripApplications/cancel/:tripApplicationId:
+ *   get:
+ *     tags:
+ *       - Trip
+ *     description: Sets a tripApplication status to CANCELED
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: The canceled trip application
+ *         schema:
+ *           $ref: '#/definitions/TripApplication'
+ */
+  app.route("/v2/tripApplications/cancel/:tripApplicationId").get(tripApplication.cancel_trip_application);
+
+  /**
    * @swagger
    * /v2/tripApplications/:tripApplicationId:
    *   get:
@@ -113,4 +164,9 @@ module.exports = function (app) {
   app
     .route("/v2/myTripApplications")
     .get(tripApplication.list_an_actor_applications);
+
+
+
+
+
 };

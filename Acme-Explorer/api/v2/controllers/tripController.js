@@ -145,3 +145,52 @@ exports.search_trips = function (req, res) {
     });
 };
 
+//Receives Keyword
+exports.list_trips_by_keyword = function (req, res) {
+  var query = {};
+
+  query.$text = { $search: req.params.keyword };
+
+  query.deleted = false;
+
+  var skip = 0;
+  if (req.query.startFrom) {
+    skip = parseInt(req.query.startFrom);
+  }
+  var limit = 0;
+  if (req.query.pageSize) {
+    limit = parseInt(req.query.pageSize);
+  }
+
+  var sort = "";
+  if (req.query.reverse == "true") {
+    sort = "-";
+  }
+  if (req.query.sortedBy) {
+    sort += req.query.sortedBy;
+  }
+
+  console.log("Query: " + query + " Skip:" + skip + " Limit:" + limit + " Sort:" + sort);
+
+  Trip.find(query)
+    .sort(sort)
+    .skip(skip)
+    .limit(limit)
+    .lean()
+    .exec(function (err, trip) {
+      console.log('Start searching trips');
+      if (err) {
+        res.send(err);
+      }
+      else {
+        res.json(trip);
+      }
+      console.log('End searching trips');
+    });
+};
+
+exports.cancel_trip = function (req, res) {
+  //req.query.reason is the value for cancelationReason. 
+  res.sendStatus(200);
+};
+
