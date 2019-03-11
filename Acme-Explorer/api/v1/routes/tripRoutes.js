@@ -15,7 +15,7 @@ module.exports = function(app) {
      *       200:
      *         description: An array of actors
      *         schema:
-     *           $ref: '#/definitions/actors'
+     *           $ref: '#/definitions/trip'
      */
     /**
      * @swagger
@@ -30,14 +30,14 @@ module.exports = function(app) {
      *         description: Create a Trip Routes
      *         required: true
      *         schema:
-     *             $ref: "#/definitions/Actor"
+     *             $ref: "#/definitions/Trip"
      *     produces:
      *       - application/json
      *     responses:
      *       200:
      *         description: A Trip Route
      *         schema:
-     *           $ref: '#/definitions/Trip'
+     *           $ref: '#/definitions/Trips'
      */
     app
         .route("/v1/trips")
@@ -56,7 +56,7 @@ module.exports = function(app) {
      *       200:
      *         description: An array of actors
      *         schema:
-     *           $ref: '#/definitions/Trip'
+     *           $ref: '#/definitions/trip'
      */
     /**
      * @swagger
@@ -71,7 +71,7 @@ module.exports = function(app) {
      *       200:
      *         description: An array of actors
      *         schema:
-     *           $ref: '#/definitions/Trip'
+     *           $ref: '#/definitions/trip'
      */
     /**
      * @swagger
@@ -86,7 +86,7 @@ module.exports = function(app) {
      *       200:
      *         description: An array of actors
      *         schema:
-     *           $ref: '#/definitions/Trip'
+     *           $ref: '#/definitions/trip'
      */
     app
         .route("/v1/trips/:tripId")

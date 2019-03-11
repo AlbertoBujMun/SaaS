@@ -66,7 +66,7 @@ var mongoDBCredentials =
 
 var mongoDBHostname = process.env.mongoDBHostname || "localhost";
 var mongoDBPort = process.env.mongoDBPort || "27017";
-var mongoDBName = process.env.mongoDBName || "ACME-Explorer";
+var mongoDBName = process.env.mongoDBName || "ACME-EXPLORER";
 var mongoDBURI =
     "mongodb://" +
     mongoDBCredentials +
@@ -84,7 +84,7 @@ mongoose.connect(mongoDBURI, {
     socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
     family: 4, // skip trying IPv6
     useNewUrlParser: true
-    /* , autoIndex: false */
+        /* , autoIndex: false */
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -119,17 +119,17 @@ routesTripsv2(app);
 routesTripApplicationsv2(app);
 
 console.log("Connecting DB to: " + mongoDBURI);
-mongoose.connection.on("open", function (err, conn) {
-    app.listen(port, function () {
+mongoose.connection.on("open", function(err, conn) {
+    app.listen(port, function() {
         console.log("ACME-EXPORER RESTful API server started on: " + port);
     });
 });
 
-mongoose.connection.on("error", function (err, conn) {
+mongoose.connection.on("error", function(err, conn) {
     console.error("DB init error " + err);
 });
 
-app.get("/swagger.json", function (req, res) {
+app.get("/swagger.json", function(req, res) {
     res.setHeader("Content-Type", "application/json");
     res.send(swaggerSpec);
 });

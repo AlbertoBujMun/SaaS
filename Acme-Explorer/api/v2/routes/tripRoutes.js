@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function (app) {
+module.exports = function(app) {
     var trip = require("../controllers/tripController");
 
     /**
@@ -8,14 +8,14 @@ module.exports = function (app) {
      *   get:
      *     tags:
      *       - Trip
-     *     description: Returns all actors
+     *     description: Returns all trips
      *     produces:
      *       - application/json
      *     responses:
      *       200:
-     *         description: An array of actors
+     *         description: An array of trips
      *         schema:
-     *           $ref: '#/definitions/actors'
+     *           $ref: '#/definitions/Trip'
      */
     /**
      * @swagger
@@ -30,14 +30,14 @@ module.exports = function (app) {
      *         description: Create a Trip Routes
      *         required: true
      *         schema:
-     *             $ref: "#/definitions/Actor"
+     *             $ref: "#/definitions/Trip"
      *     produces:
      *       - application/json
      *     responses:
      *       200:
      *         description: A Trip Route
      *         schema:
-     *           $ref: '#/definitions/Trip'
+     *           $ref: '#/definitions/trips'
      */
     app
         .route("/v2/trips")
@@ -49,12 +49,12 @@ module.exports = function (app) {
      *   get:
      *     tags:
      *       - Trip
-     *     description: Returns all actors
+     *     description: Returns all trips
      *     produces:
      *       - application/json
      *     responses:
      *       200:
-     *         description: An array of actors
+     *         description: An array of tips
      *         schema:
      *           $ref: '#/definitions/Trip'
      */
@@ -64,12 +64,12 @@ module.exports = function (app) {
      *   put:
      *     tags:
      *       - Trip
-     *     description: Returns all actors
+     *     description: Returns all trips
      *     produces:
      *       - application/json
      *     responses:
      *       200:
-     *         description: An array of actors
+     *         description: An array of trips
      *         schema:
      *           $ref: '#/definitions/Trip'
      */
@@ -79,17 +79,25 @@ module.exports = function (app) {
      *   delete:
      *     tags:
      *       - Trip
-     *     description: Returns all actors
+     *     description: Return the trip deleted
+     *     parameters:
+     *       - in: path
+     *         name: tripId
+     *         description: Delete a Trip
+     *         required: true
+     *         type: string
+     *         schema:
+     *             $ref: "#/definitions/Trip"
      *     produces:
      *       - application/json
      *     responses:
      *       200:
-     *         description: An array of actors
+     *         description: A trip deleted
      *         schema:
-     *           $ref: '#/definitions/Trip'
+     *           $ref: '../#/Trip'
      */
     app
-        .route("/v2/trips/:tripId")
+        .route("/v2/trips/{tripId}")
         .get(trip.read_a_trip)
         .put(trip.update_a_trip)
         .delete(trip.delete_a_trip);

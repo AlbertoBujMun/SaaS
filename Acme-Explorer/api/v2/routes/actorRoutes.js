@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function (app) {
+module.exports = function(app) {
     var actors = require("../controllers/actorController");
 
     /**
@@ -110,14 +110,14 @@ module.exports = function (app) {
      *         required: true
      *         type: string
      *         schema:
-     *             $ref: "#/definitions/Actor"
+     *             $ref: "#/models/definitions/Actor"
      *     produces:
      *       - application/json
      *     responses:
      *       200:
      *         description: successful operation
      *         schema:
-     *           $ref: '#/definitions/Actor'
+     *           $ref: '#/models/definitions/Actor'
      */
     app
         .route("/v1/actors/:actorId")
