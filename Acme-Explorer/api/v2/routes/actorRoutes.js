@@ -1,6 +1,7 @@
 "use strict";
 module.exports = function (app) {
     var actors = require("../controllers/actorController");
+    var authController = require("../controllers/authController");
 
     /**
      * @swagger
@@ -46,7 +47,7 @@ module.exports = function (app) {
      *              $ref: '#/definitions/Actor'
      */
     app
-        .route("/v1/actors")
+        .route("/v2/actors")
         .get(actors.list_all_actors)
         .post(actors.create_an_actor);
 
@@ -54,7 +55,7 @@ module.exports = function (app) {
 
     /**
      * @swagger
-     * /v1/actors/{actorId}:
+     * /v2/actors/{actorId}:
      *   get:
      *     tags:
      *       - Actor
@@ -120,8 +121,7 @@ module.exports = function (app) {
      *           $ref: '#/definitions/Actor'
      */
     app
-        .route("/v1/actors/:actorId")
+        .route("/v2/actors/:actorId")
         .get(actors.read_an_actor)
-        .put(actors.update_an_actor)
-        .delete(actors.delete_an_actor);
+        .put(authController.verifyUser(["ADMINISTRATOR,MANAGER,CUSTOMER,SPONSOR"]), actors.update_an_actor);
 };

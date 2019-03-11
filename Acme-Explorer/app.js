@@ -7,11 +7,15 @@ var express = require("express"),
     TripApplication = require("./api/models/tripApplicationModel"),
     SystemInformation = require("./api/models/systemInformationModel"),
     Finder = require("./api/models/finderModel"),
+    DataWareHouse = require("./api/models/dataWareHouseModel"),
+    DataWareHouseTools = require("./api/v2/controllers/dataWarehouseController"),
     bodyParser = require("body-parser"),
     swaggerJSDoc = require("swagger-jsdoc"),
     swaggerUi = require("swagger-ui-express"),
     fs = require('fs'),
     https = require('https'),
+    admin = require('firebase-admin'),
+    serviceAccount = require('./hipernube-firebase-adminsdk-fuk61-4a298e43b6.json'),
     app = express();
 
 const options = {
@@ -104,6 +108,7 @@ var routesSponsorshipv1 = require("./api/v1/routes/sponsorshipRoutes");
 var routesTripsv1 = require("./api/v1/routes/tripRoutes");
 var routesTripApplicationsv1 = require("./api/v1/routes/tripApplicationRoutes");
 
+
 routesActorsv1(app);
 routesFindersv1(app);
 routesSystemInformationsv1(app);
@@ -117,6 +122,8 @@ var routesSystemInformationsv2 = require("./api/v2/routes/systemInformationRoute
 var routesSponsorshipv2 = require("./api/v2/routes/sponsorshipRoutes");
 var routesTripsv2 = require("./api/v2/routes/tripRoutes");
 var routesTripApplicationsv2 = require("./api/v2/routes/tripApplicationRoutes");
+var routesLoginv2 = require("./api/v2/routes/loginRoutes");
+var routesDataWareHousev2 = require("./api/v2/routes/dataWarehouseRoutes");
 
 routesActorsv2(app);
 routesFindersv2(app);
@@ -124,6 +131,8 @@ routesSystemInformationsv2(app);
 routesSponsorshipv2(app);
 routesTripsv2(app);
 routesTripApplicationsv2(app);
+routesLoginv2(app);
+routesDataWareHousev2(app);
 
 console.log("Connecting DB to: " + mongoDBURI);
 mongoose.connection.on("open", function (err, conn) {

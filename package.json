@@ -19,6 +19,7 @@
         "body-parser": "^1.18.3",
         "dateformat": "^3.0.3",
         "express": "^4.16.4",
+        "firebase-admin": "^7.0.0",
         "mongoose": "^5.4.9",
         "nanoid": "^2.0.1",
         "swagger-jsdoc": "^3.2.7",
