@@ -3,3 +3,6 @@
 node_modules
 package-lock.json
 Diagram.asta.lock
+*firebase*
+server.key
+server.cert

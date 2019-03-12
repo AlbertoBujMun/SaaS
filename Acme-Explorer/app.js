@@ -15,7 +15,7 @@ var express = require("express"),
     fs = require('fs'),
     https = require('https'),
     admin = require('firebase-admin'),
-    serviceAccount = require('./hipernube-firebase-adminsdk-fuk61-4a298e43b6.json'),
+    serviceAccount = require('./hipernube-firebase-adminsdk-fuk61-186e4a0efb.json'),
     app = express();
 
 const options = {
