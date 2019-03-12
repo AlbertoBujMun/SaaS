@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function (app) {
+module.exports = function(app) {
   var tripApplication = require("../controllers/tripApplicationController");
 
   /**
@@ -34,55 +34,61 @@ module.exports = function (app) {
     .post(tripApplication.create_a_tripApplication);
 
   /**
-         * @swagger
-         * /v2/tripApplications/reject/:tripApplicationId:
-         *   get:
-         *     tags:
-         *       - Trip
-         *     description: Sets a tripApplication status to REJECTED
-         *     produces:
-         *       - application/json
-         *     responses:
-         *       200:
-         *         description: The rejected trip application
-         *         schema:
-         *           $ref: '#/definitions/TripApplication'
-         */
-  app.route("/v2/tripApplications/reject/:tripApplicationId").get(tripApplication.reject_trip_application);
+   * @swagger
+   * /v2/tripApplications/reject/:tripApplicationId:
+   *   put:
+   *     tags:
+   *       - Trip
+   *     description: Sets a tripApplication status to REJECTED
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: The rejected trip application
+   *         schema:
+   *           $ref: '#/definitions/TripApplication'
+   */
+  app
+    .route("/v2/tripApplications/reject/:tripApplicationId")
+    .put(tripApplication.reject_trip_application);
 
   /**
-       * @swagger
-       * /v2/tripApplications/due/:tripApplicationId:
-       *   get:
-       *     tags:
-       *       - Trip
-       *     description: Sets a tripApplication status to DUE
-       *     produces:
-       *       - application/json
-       *     responses:
-       *       200:
-       *         description: The due trip application
-       *         schema:
-       *           $ref: '#/definitions/TripApplication'
-       */
-  app.route("/v2/tripApplications/due/:tripApplicationId").get(tripApplication.due_trip_application);
+   * @swagger
+   * /v2/tripApplications/due/:tripApplicationId:
+   *   put:
+   *     tags:
+   *       - Trip
+   *     description: Sets a tripApplication status to DUE
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: The due trip application
+   *         schema:
+   *           $ref: '#/definitions/TripApplication'
+   */
+  app
+    .route("/v2/tripApplications/due/:tripApplicationId")
+    .put(tripApplication.due_trip_application);
 
   /**
- * @swagger
- * /v2/tripApplications/cancel/:tripApplicationId:
- *   get:
- *     tags:
- *       - Trip
- *     description: Sets a tripApplication status to CANCELED
- *     produces:
- *       - application/json
- *     responses:
- *       200:
- *         description: The canceled trip application
- *         schema:
- *           $ref: '#/definitions/TripApplication'
- */
-  app.route("/v2/tripApplications/cancel/:tripApplicationId").get(tripApplication.cancel_trip_application);
+   * @swagger
+   * /v2/tripApplications/cancel/:tripApplicationId:
+   *   put:
+   *     tags:
+   *       - Trip
+   *     description: Sets a tripApplication status to CANCELED
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: The canceled trip application
+   *         schema:
+   *           $ref: '#/definitions/TripApplication'
+   */
+  app
+    .route("/v2/tripApplications/cancel/:tripApplicationId")
+    .put(tripApplication.cancel_trip_application);
 
   /**
    * @swagger
@@ -130,21 +136,21 @@ module.exports = function (app) {
   /**
    * @swagger
    * /v2/tripApplications/:tripApplicationId/pay:
-   *   get:
+   *   put:
    *     tags:
    *       - TripApplication
-   *     description: Returns all actors
+   *     description: Pay for a trip
    *     produces:
    *       - application/json
    *     responses:
    *       200:
-   *         description: An array of actors
+   *         description: A trip application
    *         schema:
    *           $ref: '#/definitions/TripApplication'
    */
   app
     .route("/v2/tripApplications/pay/:tripApplicationId")
-    .get(tripApplication.pay_a_tripApplication);
+    .put(tripApplication.pay_a_tripApplication);
 
   /**
    * @swagger
@@ -164,9 +170,4 @@ module.exports = function (app) {
   app
     .route("/v2/myTripApplications")
     .get(tripApplication.list_an_actor_applications);
-
-
-
-
-
 };

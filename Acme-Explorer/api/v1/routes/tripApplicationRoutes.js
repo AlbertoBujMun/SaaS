@@ -79,7 +79,7 @@ module.exports = function(app) {
   /**
    * @swagger
    * /v1/tripApplications/:tripApplicationId/pay:
-   *   get:
+   *   put:
    *     tags:
    *       - TripApplication
    *     description: Returns all actors
@@ -93,7 +93,7 @@ module.exports = function(app) {
    */
   app
     .route("/v1/tripApplications/pay/:tripApplicationId")
-    .get(tripApplication.pay_a_tripApplication);
+    .put(tripApplication.pay_a_tripApplication);
 
   /**
    * @swagger

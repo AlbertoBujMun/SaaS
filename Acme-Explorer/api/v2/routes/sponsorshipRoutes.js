@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function (app) {
+module.exports = function(app) {
   var sponsorships = require("../controllers/sponsorshipController");
   /**
    * @swagger
@@ -79,21 +79,21 @@ module.exports = function (app) {
   /**
    * @swagger
    * /v2/sponsorships/:sponsorshipId/pay:
-   *   get:
+   *   put:
    *     tags:
    *       - SponsorShip
-   *     description: Returns all actors
+   *     description: Pay for a sponsorship
    *     produces:
    *       - application/json
    *     responses:
    *       200:
-   *         description: An array of actors
+   *         description: Returns the sponsorship paid for
    *         schema:
    *           $ref: '#/definitions/SponsorShip'
    */
   app
     .route("/v2/sponsorships/:sponsorshipId/pay")
-    .get(sponsorships.pay_a_sponsorship);
+    .put(sponsorships.pay_a_sponsorship);
   /**
    * @swagger
    * /v2/sponsorships/random/:ticker:
