@@ -1,8 +1,8 @@
 
 var async = require("async");
 var mongoose = require('mongoose'),
-    DataWareHouse = mongoose.model('DataWareHouse'),
-    Orders = mongoose.model('Orders');
+    DataWareHouse = mongoose.model('DataWareHouse');
+/*   Orders = mongoose.model('Orders'); */
 
 exports.list_all_indicators = function (req, res) {
     console.log('Requesting indicators');
@@ -54,25 +54,25 @@ function createDataWareHouseJob() {
         var new_dataWareHouse = new DataWareHouse();
         console.log('Cron job submitted. Rebuild period: ' + rebuildPeriod);
         async.parallel([
-            computeTopCancellers,
-            computeTopNotCancellers,
-            computeBottomNotCancellers,
-            computeTopClerks,
-            computeBottomClerks,
-            computeRatioCancelledOrders
+            /*   computeTopCancellers,
+              computeTopNotCancellers,
+              computeBottomNotCancellers,
+              computeTopClerks,
+              computeBottomClerks,
+              computeRatioCancelledOrders */
         ], function (err, results) {
             if (err) {
                 console.log("Error computing datawarehouse: " + err);
             }
             else {
                 //console.log("Resultados obtenidos por las agregaciones: "+JSON.stringify(results));
-                new_dataWareHouse.topCancellers = results[0];
-                new_dataWareHouse.topNotCancellers = results[1];
-                new_dataWareHouse.bottomNotCancellers = results[2];
-                new_dataWareHouse.topClerks = results[3];
-                new_dataWareHouse.bottomClerks = results[4];
-                new_dataWareHouse.ratioCancelledOrders = results[5];
-                new_dataWareHouse.rebuildPeriod = rebuildPeriod;
+                /*  new_dataWareHouse.topCancellers = results[0];
+                 new_dataWareHouse.topNotCancellers = results[1];
+                 new_dataWareHouse.bottomNotCancellers = results[2];
+                 new_dataWareHouse.topClerks = results[3];
+                 new_dataWareHouse.bottomClerks = results[4];
+                 new_dataWareHouse.ratioCancelledOrders = results[5];
+                 new_dataWareHouse.rebuildPeriod = rebuildPeriod; */
 
                 new_dataWareHouse.save(function (err, datawarehouse) {
                     if (err) {

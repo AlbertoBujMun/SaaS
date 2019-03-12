@@ -17,6 +17,7 @@
         "async": "^2.6.2",
         "bcrypt": "^3.0.4",
         "body-parser": "^1.18.3",
+        "cron": "^1.7.0",
         "dateformat": "^3.0.3",
         "express": "^4.16.4",
         "firebase-admin": "^7.0.0",
