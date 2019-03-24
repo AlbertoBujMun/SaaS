@@ -1,0 +1,25 @@
+{ 
+    "_id" : ObjectId("5c9779767f5ab62aa05393b6"), 
+    "status" : "PENDING", 
+    "explorer" : ObjectId("5c975d4e03a40b1e68ededdd"), 
+    "trip" : ObjectId("5c97779d7f5ab62aa05393ac"), 
+    "comments" : "I want to go", 
+    "applicationDate" : ISODate("2019-03-24T12:35:02.040+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c9779e27f5ab62aa05393b7"), 
+    "status" : "PENDING", 
+    "explorer" : ObjectId("5c975da203a40b1e68edede3"), 
+    "trip" : ObjectId("5c97781e7f5ab62aa05393af"), 
+    "applicationDate" : ISODate("2019-03-24T12:36:50.751+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c9779fa7f5ab62aa05393b8"), 
+    "status" : "PENDING", 
+    "explorer" : ObjectId("5c975d8503a40b1e68edede1"), 
+    "trip" : ObjectId("5c9778517f5ab62aa05393b2"), 
+    "applicationDate" : ISODate("2019-03-24T12:37:14.524+0000"), 
+    "__v" : NumberInt(0)
+}

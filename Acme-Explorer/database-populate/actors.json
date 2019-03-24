@@ -1,0 +1,160 @@
+{ 
+    "_id" : ObjectId("5c974f7a68a9bd26b809714f"), 
+    "preferredLanguage" : "en", 
+    "role" : [
+        "SPONSOR"
+    ], 
+    "deleted" : false, 
+    "banned" : false, 
+    "name" : "Sponsor1", 
+    "surname" : "Sponsor 1", 
+    "phoneNumber" : "123456789", 
+    "email" : "sponsor1@gmail.com", 
+    "password" : "$2b$05$Uqkt8GpcOhjhJHAKDjhtS.MeeX08OR7cTbyrw/WazshfcLW1ko4Oq", 
+    "created" : ISODate("2019-03-24T09:35:54.348+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c974fbf68a9bd26b8097150"), 
+    "preferredLanguage" : "en", 
+    "role" : [
+        "SPONSOR"
+    ], 
+    "deleted" : false, 
+    "banned" : false, 
+    "name" : "Sponsor2", 
+    "surname" : "Sponsor 2", 
+    "phoneNumber" : "123456789", 
+    "email" : "sponsor2@gmail.com", 
+    "password" : "$2b$05$wqwAkBa27wQVw1KowRgzmOgdx8ap3lHGZ8TY7u4RXXpdih1PTau2a", 
+    "created" : ISODate("2019-03-24T09:37:03.665+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97503f68a9bd26b8097156"), 
+    "preferredLanguage" : "en", 
+    "role" : [
+        "ADMINISTRATOR"
+    ], 
+    "deleted" : false, 
+    "banned" : false, 
+    "name" : "Administrador", 
+    "surname" : "Sistema", 
+    "phoneNumber" : "123456789", 
+    "email" : "admin@gmail.com", 
+    "password" : "$2b$05$5Gd4Ufdr2iMNebMIwIz4.eFBM7K.gTFww9R8tZv3I4UVrmDK7tEve", 
+    "created" : ISODate("2019-03-24T09:39:11.499+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97505768a9bd26b8097157"), 
+    "preferredLanguage" : "en", 
+    "role" : [
+        "MANAGER"
+    ], 
+    "deleted" : false, 
+    "banned" : false, 
+    "name" : "Manager 1", 
+    "surname" : "Manager", 
+    "phoneNumber" : "123456789", 
+    "email" : "manager1@gmail.com", 
+    "password" : "$2b$05$7j1HpXLwGhXA8Q5wUFcBxeLrxDeImq1OgKkwalOooT.PR7M.QCyta", 
+    "created" : ISODate("2019-03-24T09:39:35.963+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97506468a9bd26b8097158"), 
+    "preferredLanguage" : "en", 
+    "role" : [
+        "MANAGER"
+    ], 
+    "deleted" : false, 
+    "banned" : false, 
+    "name" : "Manager 2", 
+    "surname" : "Manager 2", 
+    "phoneNumber" : "123456789", 
+    "email" : "manager2@gmail.com", 
+    "password" : "$2b$05$nlvTdQUxaYh6Wzqgc.lYOO4XD/4v6lXvItGev6gJkEwRff6J2aXGC", 
+    "created" : ISODate("2019-03-24T09:39:48.935+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c975d4e03a40b1e68ededdd"), 
+    "preferredLanguage" : "en", 
+    "role" : [
+        "EXPLORER"
+    ], 
+    "deleted" : false, 
+    "banned" : false, 
+    "name" : "Explorer 1", 
+    "surname" : "Explorer 1", 
+    "phoneNumber" : "123456789", 
+    "email" : "explorer1@gmail.com", 
+    "password" : "$2b$05$v5Uvwlx4PX.oERa.CS5YXe/Os48kv1ia4Z0c9TfVUHcSgTPOWsTQa", 
+    "created" : ISODate("2019-03-24T10:34:54.372+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c975d7703a40b1e68ededdf"), 
+    "preferredLanguage" : "en", 
+    "role" : [
+        "EXPLORER"
+    ], 
+    "deleted" : false, 
+    "banned" : false, 
+    "name" : "Explorer 2", 
+    "surname" : "Explorer 2", 
+    "phoneNumber" : "123456789", 
+    "email" : "explorer2@gmail.com", 
+    "password" : "$2b$05$RjK9T4w8f2AwMWksYFs0DOAkWUsijCK.wy.IZ0OteC7vR7oFEF/e6", 
+    "created" : ISODate("2019-03-24T10:35:35.322+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c975d8503a40b1e68edede1"), 
+    "preferredLanguage" : "en", 
+    "role" : [
+        "EXPLORER"
+    ], 
+    "deleted" : false, 
+    "banned" : false, 
+    "name" : "Explorer 3", 
+    "surname" : "Explorer 3", 
+    "phoneNumber" : "123456789", 
+    "email" : "explorer3@gmail.com", 
+    "password" : "$2b$05$CvfyyOv/a4Ad/4bq7XcpIevsLHQD7wjX3EKm.7rgk160aPLZq8a7O", 
+    "created" : ISODate("2019-03-24T10:35:49.954+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c975da203a40b1e68edede3"), 
+    "preferredLanguage" : "en", 
+    "role" : [
+        "EXPLORER"
+    ], 
+    "deleted" : false, 
+    "banned" : false, 
+    "name" : "Explorer 4", 
+    "surname" : "Explorer 4", 
+    "phoneNumber" : "123456789", 
+    "email" : "explorer4@gmail.com", 
+    "password" : "$2b$05$6JbRDCZLNcDuekvwxB5fXOrUes9uYTHNY4UznXU/rjrNlMIXxK7om", 
+    "created" : ISODate("2019-03-24T10:36:18.891+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c975dbc03a40b1e68edede5"), 
+    "preferredLanguage" : "en", 
+    "role" : [
+        "EXPLORER"
+    ], 
+    "deleted" : false, 
+    "banned" : false, 
+    "name" : "Explorer 5", 
+    "surname" : "Explorer 5", 
+    "phoneNumber" : "123456789", 
+    "email" : "explorer5@gmail.com", 
+    "password" : "$2b$05$JHE6Op6Kl.Woc1oI.bcxAeEFrw2x4EJTIeBtzejiOMxFv2w9K5fdO", 
+    "created" : ISODate("2019-03-24T10:36:44.584+0000"), 
+    "__v" : NumberInt(0)
+}

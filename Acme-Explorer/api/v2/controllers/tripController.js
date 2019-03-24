@@ -16,7 +16,6 @@ exports.list_all_trips = function (req, res) {
 
 exports.create_a_trip = function (req, res) {
   var new_trip = new Trip(req.body);
-
   new_trip.save(function (error, trip) {
     if (error) {
       res.send(error);

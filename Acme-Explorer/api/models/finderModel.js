@@ -42,7 +42,7 @@ var FinderSchema = new Schema({
   },
   minimumPrice: {
     type: Number,
-    default: null,
+    default: 0,
     validate: [
       isLowerThan,
       "The minimum price must be lower than the maximum price"
@@ -50,7 +50,7 @@ var FinderSchema = new Schema({
   },
   maximumPrice: {
     type: Number,
-    default: null,
+    default: 0,
     validate: [
       isGreaterThan,
       "The maximum price must be greater than the minimum price"
@@ -58,12 +58,12 @@ var FinderSchema = new Schema({
   },
   startDate: {
     type: Date,
-    default: null,
+    default: Date.now,
     validate: [isEarlierThan, "The start date must be before the end date"]
   },
   endDate: {
     type: Date,
-    default: null,
+    default: Date.now,
     validate: [isLaterThan, "The end date must be after the start date"]
   },
   explorer: {

@@ -38,8 +38,7 @@ var SponsorshipSchema = new Schema({
     required: "Sponsor id is required"
   },
   paymentDate: {
-    type: Date,
-    default: null
+    type: Date
   },
   banner: {
     data: Buffer,

@@ -1,0 +1,70 @@
+{ 
+    "_id" : ObjectId("5c975d4e03a40b1e68ededde"), 
+    "keyword" : null, 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(0), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "startDate" : ISODate("2019-03-24T10:34:54.374+0000"), 
+    "endDate" : ISODate("2019-03-24T10:34:54.374+0000"), 
+    "explorer" : ObjectId("5c975d4e03a40b1e68ededdd"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c975d7703a40b1e68edede0"), 
+    "keyword" : null, 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(0), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "startDate" : ISODate("2019-03-24T10:35:35.323+0000"), 
+    "endDate" : ISODate("2019-03-24T10:35:35.323+0000"), 
+    "explorer" : ObjectId("5c975d7703a40b1e68ededdf"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c975d8503a40b1e68edede2"), 
+    "keyword" : null, 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(0), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "startDate" : ISODate("2019-03-24T10:35:49.956+0000"), 
+    "endDate" : ISODate("2019-03-24T10:35:49.956+0000"), 
+    "explorer" : ObjectId("5c975d8503a40b1e68edede1"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c975da203a40b1e68edede4"), 
+    "keyword" : null, 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(0), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "startDate" : ISODate("2019-03-24T10:36:18.891+0000"), 
+    "endDate" : ISODate("2019-03-24T10:36:18.891+0000"), 
+    "explorer" : ObjectId("5c975da203a40b1e68edede3"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c975dbc03a40b1e68edede6"), 
+    "keyword" : null, 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(0), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "startDate" : ISODate("2019-03-24T10:36:44.585+0000"), 
+    "endDate" : ISODate("2019-03-24T10:36:44.585+0000"), 
+    "explorer" : ObjectId("5c975dbc03a40b1e68edede5"), 
+    "__v" : NumberInt(0)
+}

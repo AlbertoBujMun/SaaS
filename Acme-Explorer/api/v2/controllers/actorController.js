@@ -1,7 +1,8 @@
 "use strict";
 /*---------------ACTOR----------------------*/
 var mongoose = require("mongoose"),
-    Actor = mongoose.model("Actors");
+    Actor = mongoose.model("Actors"),
+    Finder = mongoose.model("Finders");
 
 exports.list_all_actors = function (req, res) {
     //Check if the role param exist
@@ -21,6 +22,7 @@ exports.list_all_actors = function (req, res) {
 
 exports.create_an_actor = function (req, res) {
     var new_actor = new Actor(req.body);
+    var new_finder = new Finder();
     /* if((new_actor.role.includes('MANAGER')) and not logged as admin){
       error
     }  */
@@ -31,10 +33,28 @@ exports.create_an_actor = function (req, res) {
     }*/
     new_actor.save(function (err, actor) {
         if (err) {
+            console.log(err)
             res.send(err);
         } else {
-            res.json(actor);
+            if (new_actor.role.includes("EXPLORER")) {
+                new_finder.explorer = new_actor._id;
+                new_finder.save(function (err2, finder) {
+                    if (err2) {
+                        console.log(err2)
+                        res.send(err2);
+                    }
+                    else {
+                        res.json(actor);
+                        res.json(finder);
+                    }
+                });
+            }
+            else {
+                res.json(actor);
+            }
+
         }
+
     });
 };
 

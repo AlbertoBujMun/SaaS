@@ -1,0 +1,7 @@
+{ 
+    "_id" : ObjectId("5c976d30500b01321800de2b"), 
+    "sponsorRate" : NumberInt(20), 
+    "cacheTime" : NumberInt(1), 
+    "resultsNumber" : NumberInt(10), 
+    "__v" : NumberInt(0)
+}

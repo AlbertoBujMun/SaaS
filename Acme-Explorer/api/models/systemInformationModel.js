@@ -37,7 +37,7 @@ var SystemInformationSchema = new Schema({
   },
   resultsNumber: {
     type: Number,
-    maxx: 100,
+    max: 100,
     required: "please state a maximum results number"
   }
 });

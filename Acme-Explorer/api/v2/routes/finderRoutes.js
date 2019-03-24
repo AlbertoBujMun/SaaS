@@ -3,29 +3,6 @@ module.exports = function (app) {
     var finders = require("../controllers/finderController");
     /**
      * @swagger
-     * /v2/finders:
-     *   post:
-     *     tags:
-     *       - Finder
-     *     description: Returns a finder created
-     *     parameters:
-     *       - in: body
-     *         name: body
-     *         description: Create a Finder
-     *         required: true
-     *         schema:
-     *             $ref: "#/definitions/Finder"
-     *     produces:
-     *       - application/json
-     *     responses:
-     *       200:
-     *         description: A finder created
-     *         schema:
-     *           $ref: '#/definitions/Finder'
-     */
-    app.route("/v2/finders").post(finders.create_a_finder);
-    /**
-     * @swagger
      * /v2/finders/{actorId}:
      *   get:
      *     tags:

@@ -1,0 +1,137 @@
+{ 
+    "_id" : ObjectId("5c9777927f5ab62aa05393aa"), 
+    "requirement" : [
+        "Requirement 1", 
+        "Requirement 2"
+    ], 
+    "public" : false, 
+    "deleted" : false, 
+    "title" : "Trip 1", 
+    "description" : "Description of Trip 1", 
+    "startDate" : ISODate("2019-04-22T14:56:59.301+0000"), 
+    "endDate" : ISODate("2019-04-26T14:56:59.301+0000"), 
+    "cancelationReason" : "Falta de personal", 
+    "manager" : ObjectId("5c97505768a9bd26b8097157"), 
+    "tripStage" : [
+        {
+            "deleted" : false, 
+            "_id" : ObjectId("5c9777927f5ab62aa05393ab"), 
+            "title" : "Stage 1", 
+            "description" : "Description of Stage 1", 
+            "price" : NumberInt(40)
+        }
+    ], 
+    "photo" : [
+
+    ], 
+    "created" : ISODate("2019-03-24T12:26:58.583+0000"), 
+    "ticker" : "190324-GDSH", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97779d7f5ab62aa05393ac"), 
+    "requirement" : [
+        "Requirement 1", 
+        "Requirement 2", 
+        "Requirement 3"
+    ], 
+    "public" : false, 
+    "deleted" : false, 
+    "title" : "Trip 2", 
+    "description" : "Description of Trip 2", 
+    "startDate" : ISODate("2019-08-22T14:56:59.301+0000"), 
+    "endDate" : ISODate("2019-09-26T14:56:59.301+0000"), 
+    "manager" : ObjectId("5c97505768a9bd26b8097157"), 
+    "tripStage" : [
+        {
+            "deleted" : false, 
+            "_id" : ObjectId("5c97779d7f5ab62aa05393ae"), 
+            "title" : "Stage 1", 
+            "description" : "Description of Stage 1", 
+            "price" : NumberInt(40)
+        }, 
+        {
+            "deleted" : false, 
+            "_id" : ObjectId("5c97779d7f5ab62aa05393ad"), 
+            "title" : "Stage 2", 
+            "description" : "Description of Stage 2", 
+            "price" : NumberInt(90)
+        }
+    ], 
+    "photo" : [
+
+    ], 
+    "created" : ISODate("2019-03-24T12:27:09.976+0000"), 
+    "ticker" : "190324-NFNP", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97781e7f5ab62aa05393af"), 
+    "requirement" : [
+        "Requirement 1"
+    ], 
+    "public" : false, 
+    "deleted" : false, 
+    "title" : "Trip 3", 
+    "description" : "Description of Trip 3", 
+    "startDate" : ISODate("2019-02-22T14:56:59.301+0000"), 
+    "endDate" : ISODate("2019-02-26T14:56:59.301+0000"), 
+    "manager" : ObjectId("5c97506468a9bd26b8097158"), 
+    "tripStage" : [
+        {
+            "deleted" : false, 
+            "_id" : ObjectId("5c97781e7f5ab62aa05393b1"), 
+            "title" : "Stage 1", 
+            "description" : "Description of Stage 1", 
+            "price" : NumberInt(75)
+        }, 
+        {
+            "deleted" : false, 
+            "_id" : ObjectId("5c97781e7f5ab62aa05393b0"), 
+            "title" : "Stage 2", 
+            "description" : "Description of Stage 2", 
+            "price" : NumberInt(20)
+        }
+    ], 
+    "photo" : [
+
+    ], 
+    "created" : ISODate("2019-03-24T12:29:18.864+0000"), 
+    "ticker" : "190324-NJCL", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c9778517f5ab62aa05393b2"), 
+    "requirement" : [
+        "Requirement 1"
+    ], 
+    "public" : false, 
+    "deleted" : false, 
+    "title" : "Trip 4", 
+    "description" : "Description of Trip 4", 
+    "startDate" : ISODate("2019-02-22T14:56:59.301+0000"), 
+    "endDate" : ISODate("2019-08-26T14:56:59.301+0000"), 
+    "manager" : ObjectId("5c97506468a9bd26b8097158"), 
+    "tripStage" : [
+        {
+            "deleted" : false, 
+            "_id" : ObjectId("5c9778517f5ab62aa05393b4"), 
+            "title" : "Stage 1", 
+            "description" : "Description of Stage 1", 
+            "price" : NumberInt(250)
+        }, 
+        {
+            "deleted" : false, 
+            "_id" : ObjectId("5c9778517f5ab62aa05393b3"), 
+            "title" : "Stage 2", 
+            "description" : "Description of Stage 2", 
+            "price" : NumberInt(20)
+        }
+    ], 
+    "photo" : [
+
+    ], 
+    "created" : ISODate("2019-03-24T12:30:09.737+0000"), 
+    "ticker" : "190324-IMPN", 
+    "__v" : NumberInt(0)
+}

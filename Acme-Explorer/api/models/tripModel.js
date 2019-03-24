@@ -1,5 +1,6 @@
 "use strict";
 var mongoose = require("mongoose");
+var dateFormat = require("dateformat");
 var Schema = mongoose.Schema;
 
 var TripStageSchema = new Schema(
@@ -144,11 +145,21 @@ TripSchema.pre("save", function (callback) {
   var new_trip = this;
   var day = dateFormat(new Date(), "yymmdd");
 
-  var generated_ticker = [day, generate("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 4)].join(
+  var generated_ticker = [day, rand_str()].join(
     "-"
   );
   new_trip.ticker = generated_ticker;
   callback();
 });
+
+function rand_str() {
+  const list = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
+  var res = "";
+  for (var i = 0; i < 4; i++) {
+    var rnd = Math.floor(Math.random() * list.length);
+    res = res + list.charAt(rnd);
+  }
+  return res;
+}
 
 module.exports = mongoose.model("Trips", TripSchema);

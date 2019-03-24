@@ -1,0 +1,18 @@
+{ 
+    "_id" : ObjectId("5c976922c20c8936f49e9f9f"), 
+    "link" : "http://sponsorship1.es", 
+    "sponsor" : ObjectId("5c974f7a68a9bd26b809714f"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c9769aff19c983038e4948f"), 
+    "link" : "http://sponsorship2.es", 
+    "sponsor" : ObjectId("5c974f7a68a9bd26b809714f"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c9769daf5388c081cec749d"), 
+    "link" : "http://sponsorship3.es", 
+    "sponsor" : ObjectId("5c974fbf68a9bd26b8097150"), 
+    "__v" : NumberInt(0)
+}
