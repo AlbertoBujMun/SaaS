@@ -98,27 +98,27 @@ var ActorSchema = new Schema({
         type: Boolean,
         default: false
     },
+    customToken: {
+        type: String
+    },
     created: {
         type: Date,
         default: Date.now
-    },
-    customToken: {
-        type: String
     }
 }, { strict: false });
 
 ActorSchema.index({ email: 1 });
 
-ActorSchema.pre("save", function (callback) {
+ActorSchema.pre("save", function(callback) {
     var actor = this;
     // Break out if the password hasn't changed
     if (!actor.isModified("password")) return callback();
 
     // Password changed so we need to hash it
-    bcrypt.genSalt(5, function (err, salt) {
+    bcrypt.genSalt(5, function(err, salt) {
         if (err) return callback(err);
 
-        bcrypt.hash(actor.password, salt, function (err, hash) {
+        bcrypt.hash(actor.password, salt, function(err, hash) {
             if (err) return callback(err);
 
             actor.password = hash;
@@ -127,8 +127,8 @@ ActorSchema.pre("save", function (callback) {
     });
 });
 
-ActorSchema.methods.verifyPassword = function (password, cb) {
-    bcrypt.compare(password, this.password, function (err, isMatch) {
+ActorSchema.methods.verifyPassword = function(password, cb) {
+    bcrypt.compare(password, this.password, function(err, isMatch) {
         console.log("verifying password in actorModel: " + password);
         if (err) return cb(err);
         console.log("iMatch: " + isMatch);
