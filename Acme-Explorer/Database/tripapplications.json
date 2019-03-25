@@ -1,0 +1,10 @@
+{ 
+    "_id" : ObjectId("5c97d09fd62d20690694f567"), 
+    "status" : "PENDING", 
+    "comments" : "Querría saber la hora de salida.", 
+    "applicationDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "rejectionReason" : "2019-03-24", 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "trip" : ObjectId("5c97c4c74592d266bee63e27"), 
+    "__v" : NumberInt(0)
+}

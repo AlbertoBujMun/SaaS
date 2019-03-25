@@ -1,0 +1,108 @@
+{ 
+    "_id" : ObjectId("5c7c25c2f800485983f58717"), 
+    "preferredLanguage" : "en", 
+    "role" : [
+        "ADMINISTRATOR"
+    ], 
+    "deleted" : false, 
+    "banned" : false, 
+    "name" : "string", 
+    "surname" : "string", 
+    "email" : "PRUEBA@prueba.com", 
+    "password" : "string", 
+    "preferedLanguage" : "string", 
+    "phoneNumber" : "string", 
+    "address" : "string", 
+    "created" : ISODate("2019-03-03T00:00:00.000+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c7c33f80e5caf6e3cfee1fb"), 
+    "preferredLanguage" : "en", 
+    "role" : [
+        "ADMINISTRATOR"
+    ], 
+    "deleted" : true, 
+    "banned" : true, 
+    "name" : "string", 
+    "surname" : "string", 
+    "email" : "PRUEBA1@prueba.com", 
+    "password" : "iupoiupo", 
+    "preferedLanguage" : "string", 
+    "phoneNumber" : "string", 
+    "address" : "string", 
+    "created" : ISODate("2019-03-03T00:00:00.000+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "preferredLanguage" : "en", 
+    "role" : [
+        "EXPLORER"
+    ], 
+    "deleted" : true, 
+    "banned" : false, 
+    "name" : "string", 
+    "surname" : "string", 
+    "email" : "PRUEBA3@prueba.com", 
+    "password" : "$2b$05$7wNcklm7seV1s.hj/Asri.QXK4UnTEanz4EwMd7i/8C6nNNQVtGhW", 
+    "preferedLanguage" : "string", 
+    "phoneNumber" : "string", 
+    "address" : "string", 
+    "created" : ISODate("2019-03-03T00:00:00.000+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c7d73e36827d102c1c2eae5"), 
+    "preferredLanguage" : "en", 
+    "role" : [
+        "MANAGER"
+    ], 
+    "deleted" : false, 
+    "banned" : false, 
+    "name" : "Pedro", 
+    "surname" : "Sánchez Pérez", 
+    "email" : "pesanpe@gmail.com", 
+    "password" : "$2b$05$mdh7gFZyotEJeqUf1b/46uk/xJR8RJuXE3SVl09O3ZbrpZZ3MLIMe", 
+    "preferedLanguage" : "es", 
+    "phoneNumber" : "605903326", 
+    "address" : "Calle Madre de la Iglesia 3A", 
+    "created" : ISODate("2019-03-04T00:00:00.000+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c7d753b6827d102c1c2eae6"), 
+    "preferredLanguage" : "en", 
+    "role" : [
+        "SPONSOR"
+    ], 
+    "deleted" : true, 
+    "banned" : true, 
+    "name" : "Julio", 
+    "surname" : "Troncoso", 
+    "email" : "jultron@gmail.com", 
+    "password" : "$2b$05$DOr6WQY57q1I5Gv6A4BDaeegDrJYGDKXz.ShGqj4buk7QxWfPAt8C", 
+    "preferedLanguage" : "es", 
+    "phoneNumber" : "685124577", 
+    "address" : "Calle Prueba, 58", 
+    "created" : ISODate("2019-03-04T00:00:00.000+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c967a801c829a1f52936a3f"), 
+    "preferredLanguage" : "en", 
+    "role" : [
+        "SPONSOR"
+    ], 
+    "deleted" : false, 
+    "banned" : false, 
+    "name" : "Antonio", 
+    "surname" : "Sánchez Mejías", 
+    "email" : "ansame@gmail.com", 
+    "password" : "$2b$05$p60cEO9T8U/XxDCPBrnY6OJqbE11aUpEQzKl7tkF1Igo.a76kyX2K", 
+    "preferedLanguage" : "es", 
+    "phoneNumber" : "654789215", 
+    "address" : "Calle Esperanza, 15", 
+    "created" : ISODate("2019-03-23T00:00:00.000+0000"), 
+    "__v" : NumberInt(0)
+}

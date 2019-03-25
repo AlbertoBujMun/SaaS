@@ -1,0 +1,336 @@
+{ 
+    "_id" : ObjectId("5c97dc32a024916b0058c968"), 
+    "keyword" : "Visita", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97dc5146500b6b2afbe33a"), 
+    "keyword" : "Jerez", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97dc8e64efe56b4e5bfcbc"), 
+    "keyword" : "Sevilla", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97ddc69f17046be503c182"), 
+    "keyword" : "Giralda", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97de1b0f906c6c02521311"), 
+    "keyword" : "Visita Giralda", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97de3f14a65b6c2d079a1f"), 
+    "keyword" : "Visita", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97de9d9188076c51b405ea"), 
+    "keyword" : "Visita", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97deb113021d6c70f2b8ce"), 
+    "keyword" : "Visita", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97decb204f376c8eff0335"), 
+    "keyword" : "Visita", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97df420a4d746cbea0817c"), 
+    "keyword" : "Visita", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97e1f26515ab6d3b54e1ed"), 
+    "keyword" : "Visita", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97e225efad336d68d4d6a0"), 
+    "keyword" : "Visita", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97e2346fa5586d8534809e"), 
+    "keyword" : "Visita", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97e37f1d1bbb6dc3a62622"), 
+    "keyword" : "Visita", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97e39cbcff886de4764e1b"), 
+    "keyword" : "Visita", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97e3b1fa5b236e018ad710"), 
+    "keyword" : "Visita", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97e4205b91186e3178b2d3"), 
+    "keyword" : "Visita", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97e43743d21c6e4efbe42b"), 
+    "keyword" : "Visita", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97e658951e486ed410ec77"), 
+    "keyword" : "Visita", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97e6d17f501c6efd602e71"), 
+    "keyword" : "Visita", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97e71200aba86f1e5ef52c"), 
+    "keyword" : "Visita", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97eb2ec9acef6fb3c30fd1"), 
+    "keyword" : "Visita", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97eb7a7d58206fd55f1737"), 
+    "keyword" : "Visita", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97ebafdf75816ffeae237e"), 
+    "keyword" : "Visita", 
+    "minimumPrice" : NumberInt(0), 
+    "maximumPrice" : NumberInt(200), 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "results" : [
+
+    ], 
+    "lastCached" : null, 
+    "explorer" : ObjectId("5c7c3be5d5b2907cf8123676"), 
+    "__v" : NumberInt(0)
+}

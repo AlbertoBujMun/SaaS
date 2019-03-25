@@ -1,0 +1,80 @@
+{ 
+    "_id" : ObjectId("5c977a2bb69b7b5e630f6532"), 
+    "requirement" : [
+        "No se puede llevar comidas o bebidas para entrar en los monumentos de la visita."
+    ], 
+    "public" : true, 
+    "deleted" : false, 
+    "ticker" : "190323-FYSJ", 
+    "title" : "Visita Jerez con Encanto", 
+    "description" : "Visita por la ciudad de Jerez y sus lugares con más encanto.", 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "created" : ISODate("2019-03-25T00:00:00.000+0000"), 
+    "manager" : ObjectId("5c7d73e36827d102c1c2eae5"), 
+    "tripStage" : [
+        {
+            "deleted" : false, 
+            "_id" : ObjectId("5c97710e9e62ed5c4e569ebc"), 
+            "title" : "Circuito de Jerez", 
+            "description" : "Visita guiado por el circuito de Jerez.", 
+            "price" : 55.5
+        }, 
+        {
+            "deleted" : false, 
+            "_id" : ObjectId("5c9772be9e62ed5c4e569ebd"), 
+            "title" : "Bodegas de Jerez", 
+            "description" : "Visita guiado por las bodegas centenarias de Jerez.", 
+            "price" : 120.5
+        }
+    ], 
+    "photo" : [
+
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5c97c4c74592d266bee63e27"), 
+    "requirement" : [
+        "No se puede llevar comidas o bebidas para entrar en los monumentos de la visita."
+    ], 
+    "public" : true, 
+    "deleted" : false, 
+    "title" : "Visita Sevilla centro", 
+    "description" : "Visita por la ciudad de Sevilla y sus lugares más emblemáticos.", 
+    "startDate" : ISODate("2019-03-24T00:00:00.000+0000"), 
+    "endDate" : ISODate("2019-03-26T00:00:00.000+0000"), 
+    "created" : ISODate("2019-03-26T00:00:00.000+0000"), 
+    "manager" : ObjectId("5c7d73e36827d102c1c2eae5"), 
+    "tripStage" : [
+        {
+            "deleted" : false, 
+            "_id" : ObjectId("5c97c0e91e572c5f919a8b2c"), 
+            "title" : "Barrio de Santa Cruz", 
+            "description" : "Visita guiada por el barrio judío de santa cruz.", 
+            "price" : 110.5, 
+            "__v" : NumberInt(0)
+        }, 
+        {
+            "deleted" : false, 
+            "_id" : ObjectId("5c97c11f1e572c5f919a8b2d"), 
+            "title" : "Catedral de Sevilla", 
+            "description" : "Visita guiada por Catedral de Sevila e incluye subida a la Giralda.", 
+            "price" : 60.5, 
+            "__v" : NumberInt(0)
+        }, 
+        {
+            "deleted" : false, 
+            "_id" : ObjectId("5c97c1711e572c5f919a8b2e"), 
+            "title" : "Torre del Oro", 
+            "description" : "Visita guiada al museo naval de la Torre del Oro.", 
+            "price" : 35.5, 
+            "__v" : NumberInt(0)
+        }
+    ], 
+    "photo" : [
+
+    ], 
+    "ticker" : "190324-PTWW", 
+    "__v" : NumberInt(0)
+}
