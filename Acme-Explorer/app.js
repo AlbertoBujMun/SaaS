@@ -8,13 +8,13 @@ var express = require("express"),
     SystemInformation = require("./api/models/systemInformationModel"),
     Finder = require("./api/models/finderModel"),
     DataWareHouse = require("./api/models/dataWareHouseModel"),
-    DataWareHouseTools = require("./api/v2/controllers/dataWarehouseController"),
+    DataWareHouseTools = require("./api/controllers/dataWarehouseController"),
     bodyParser = require("body-parser"),
     swaggerJSDoc = require("swagger-jsdoc"),
     swaggerUi = require("swagger-ui-express"),
     fs = require('fs'),
     https = require('https'),
-    admin = require('firebase-admin'),
+    firebaseAdmin = require('firebase-admin'),
     serviceAccount = require('./hipernube-firebase-adminsdk-fuk61-186e4a0efb.json'),
     app = express();
 
@@ -24,50 +24,29 @@ const options = {
 }
 
 // swagger definition
-var swaggerDefinitionv1 = {
-    info: {
-        title: "Acme Explorer API",
-        version: "1.0.0",
-        description: "This is the Acme Explorer API documentation"
-    },
-    host: "localhost:" + port,
-    basePath: ""
-};
-
-var swaggerDefinitionv2 = {
+var swaggerDefinition = {
     info: {
         title: "Acme Explorer API",
         version: "2.0.0",
         description: "This is the Acme Explorer API documentation"
     },
-    host: "localhost:" + port,
+    host: "https://localhost:" + port,
     basePath: ""
 };
 
-// options for the swagger docs
-var optionsv1 = {
+
+
+var optionsSwagger = {
     // import swaggerDefinitions
-    swaggerDefinition: swaggerDefinitionv1,
+    swaggerDefinition: swaggerDefinition,
     // path to the API docs
-    apis: ["./api/v1/**/*.js"],
+    apis: ["./api/**/*.js"],
     basePath: " / " //  Base de ruta (opcional)
 };
 
 // initialize swagger-jsdoc
-var swaggerSpecv1 = swaggerJSDoc(optionsv1);
-app.use("/v1/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecv1));
-
-var optionsv2 = {
-    // import swaggerDefinitions
-    swaggerDefinition: swaggerDefinitionv2,
-    // path to the API docs
-    apis: ["./api/v2/**/*.js"],
-    basePath: " / " //  Base de ruta (opcional)
-};
-
-// initialize swagger-jsdoc
-var swaggerSpecv2 = swaggerJSDoc(optionsv2);
-app.use("/v2/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecv2));
+var swaggerSpec = swaggerJSDoc(optionsSwagger);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // MongoDB URI building
 var mongoDBUser = process.env.mongoDBUser || "adminUser";
@@ -95,18 +74,23 @@ mongoose.connect(mongoDBURI, {
     socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
     family: 4, // skip trying IPv6
     useNewUrlParser: true
-    /* , autoIndex: false */
+        /* , autoIndex: false */
+});
+firebaseAdmin.initializeApp({
+    credential: firebaseAdmin.credential.cert(serviceAccount),
+    databaseURL: "https://saas-6d6bd.firebaseio.com"
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var routesActorsv1 = require("./api/v1/routes/actorRoutes");
-var routesFindersv1 = require("./api/v1/routes/finderRoutes");
-var routesSystemInformationsv1 = require("./api/v1/routes/systemInformationRoutes");
-var routesSponsorshipv1 = require("./api/v1/routes/sponsorshipRoutes");
-var routesTripsv1 = require("./api/v1/routes/tripRoutes");
-var routesTripApplicationsv1 = require("./api/v1/routes/tripApplicationRoutes");
+var routesActorsv1 = require("./api/routes/actorRoutes");
+var routesFindersv1 = require("./api/routes/finderRoutes");
+var routesSystemInformationsv1 = require("./api/routes/systemInformationRoutes");
+var routesSponsorshipv1 = require("./api/routes/sponsorshipRoutes");
+var routesTripsv1 = require("./api/routes/tripRoutes");
+var routesTripApplicationsv1 = require("./api/routes/tripApplicationRoutes");
+var routesTripStagesv1 = require("./api/routes/tripStageRoutes");
 
 
 routesActorsv1(app);
@@ -115,39 +99,23 @@ routesSystemInformationsv1(app);
 routesSponsorshipv1(app);
 routesTripsv1(app);
 routesTripApplicationsv1(app);
+routesTripStagesv1(app);
 
-var routesActorsv2 = require("./api/v2/routes/actorRoutes");
-var routesFindersv2 = require("./api/v2/routes/finderRoutes");
-var routesSystemInformationsv2 = require("./api/v2/routes/systemInformationRoutes");
-var routesSponsorshipv2 = require("./api/v2/routes/sponsorshipRoutes");
-var routesTripsv2 = require("./api/v2/routes/tripRoutes");
-var routesTripApplicationsv2 = require("./api/v2/routes/tripApplicationRoutes");
-var routesLoginv2 = require("./api/v2/routes/loginRoutes");
-var routesDataWareHousev2 = require("./api/v2/routes/dataWarehouseRoutes");
-
-routesActorsv2(app);
-routesFindersv2(app);
-routesSystemInformationsv2(app);
-routesSponsorshipv2(app);
-routesTripsv2(app);
-routesTripApplicationsv2(app);
-routesLoginv2(app);
-routesDataWareHousev2(app);
 
 console.log("Connecting DB to: " + mongoDBURI);
-mongoose.connection.on("open", function (err, conn) {
-    app.listen(8000, function () {
+mongoose.connection.on("open", function(err, conn) {
+    app.listen(8000, function() {
         console.log("ACME-EXPORER RESTful API server started on: " + port);
     });
     https.createServer(options, app).listen(port);
 });
 
 
-mongoose.connection.on("error", function (err, conn) {
+mongoose.connection.on("error", function(err, conn) {
     console.error("DB init error " + err);
 });
 
-app.get("/swagger.json", function (req, res) {
+app.get("/swagger.json", function(req, res) {
     res.setHeader("Content-Type", "application/json");
     res.send(swaggerSpec);
 });
