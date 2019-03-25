@@ -13,14 +13,15 @@ var express = require("express"),
     swaggerJSDoc = require("swagger-jsdoc"),
     swaggerUi = require("swagger-ui-express"),
     fs = require('fs'),
+    http = require('http'),
     https = require('https'),
     firebaseAdmin = require('firebase-admin'),
-    serviceAccount = require('./hipernube-firebase-adminsdk-fuk61-186e4a0efb.json'),
+    serviceAccount = require('./saas-6d6bd-firebase-adminsdk-yxbis-4bae6940cd'),
     app = express();
 
 const options = {
-    key: fs.readFileSync('server.key'),
-    cert: fs.readFileSync('server.cert')
+    key: fs.readFileSync('key.pem'),
+    cert: fs.readFileSync('server.crt')
 }
 
 // swagger definition
@@ -56,7 +57,7 @@ var mongoDBCredentials =
 
 var mongoDBHostname = process.env.mongoDBHostname || "localhost";
 var mongoDBPort = process.env.mongoDBPort || "27017";
-var mongoDBName = process.env.mongoDBName || "ACME-Explorer";
+var mongoDBName = process.env.mongoDBName || "ACME-EXPLORER";
 var mongoDBURI =
     "mongodb://" +
     mongoDBCredentials +
