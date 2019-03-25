@@ -1,6 +1,7 @@
 "use strict";
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
+
 /**
  * @swagger
  * tags:
@@ -28,45 +29,44 @@ var Schema = mongoose.Schema;
  *         type: string
  *         format: date
  *       explorer:
- *         type: string
+ *         type: objetc
+ *       trip:
+ *         type: objetc
  *
  */
-var TripApplicationSchema = new Schema(
-  {
+var TripApplicationSchema = new Schema({
     status: {
-      type: String,
-      default: "PENDING",
-      enum: ["PENDING", "REJECTED", "DUE", "ACCEPTED", "CANCELED"]
+        type: String,
+        default: "PENDING",
+        enum: ["PENDING", "REJECTED", "DUE", "ACCEPTED", "CANCELED"]
     },
     comments: {
-      type: String
+        type: String
     },
     applicationDate: {
-      type: Date,
-      default: Date.now
+        type: Date,
+        default: Date.now
     },
     rejectionReason: {
-      type: String,
-      required: [isRejected, "Kindly enter a rejection reason"]
+        type: String,
+        required: [isRejected, "Kindly enter a rejection reason"]
     },
     explorer: {
-      type: Schema.Types.ObjectId,
-      required: "Explorer id is required"
+        type: Schema.Types.ObjectId,
+        required: "Explorer id is required"
     },
     trip: {
-      type: Schema.Types.ObjectId,
-      required: "Trip id is required"
+        type: Schema.Types.ObjectId,
+        required: "Trip id is required"
     }
-  },
-  { strict: false }
-);
+}, { strict: false });
 
 TripApplicationSchema.index({ status: 1 });
 TripApplicationSchema.index({ explorer: 1 });
 TripApplicationSchema.index({ applicationDate: 1 });
 
 function isRejected() {
-  return this.status === "REJECTED";
+    return this.status === "REJECTED";
 }
 
 module.exports = mongoose.model("TripApplications", TripApplicationSchema);
