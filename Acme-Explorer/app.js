@@ -95,11 +95,27 @@ mongoose.connect(mongoDBURI, {
     socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
     family: 4, // skip trying IPv6
     useNewUrlParser: true
-    /* , autoIndex: false */
+        /* , autoIndex: false */
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, idToken" //ojo, que si metemos un parametro propio por la cabecera hay que declararlo aquí para que no de el error CORS
+    );
+    //res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+    next();
+});
+var adminConfig = {
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: 'https://hipernube.firebaseio.com'
+};
+admin.initializeApp(adminConfig);
 
 var routesActorsv1 = require("./api/v1/routes/actorRoutes");
 var routesFindersv1 = require("./api/v1/routes/finderRoutes");
@@ -135,19 +151,19 @@ routesLoginv2(app);
 routesDataWareHousev2(app);
 
 console.log("Connecting DB to: " + mongoDBURI);
-mongoose.connection.on("open", function (err, conn) {
-    app.listen(8000, function () {
+mongoose.connection.on("open", function(err, conn) {
+    app.listen(8000, function() {
         console.log("ACME-EXPORER RESTful API server started on: " + port);
     });
     https.createServer(options, app).listen(port);
 });
 
 
-mongoose.connection.on("error", function (err, conn) {
+mongoose.connection.on("error", function(err, conn) {
     console.error("DB init error " + err);
 });
 
-app.get("/swagger.json", function (req, res) {
+app.get("/swagger.json", function(req, res) {
     res.setHeader("Content-Type", "application/json");
     res.send(swaggerSpec);
 });
