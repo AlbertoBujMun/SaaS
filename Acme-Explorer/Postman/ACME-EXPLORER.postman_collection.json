@@ -1,0 +1,232 @@
+{
+	"variables": [],
+	"info": {
+		"name": "ACME-EXPLORER",
+		"_postman_id": "3eaf2779-2ed4-bc7c-8975-81ed4efae848",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Actors",
+			"description": "",
+			"item": [
+				{
+					"name": "https://localhost:8080/v1/actors",
+					"request": {
+						"url": "https://localhost:8080/v1/actors",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:8080/v1/actors",
+					"request": {
+						"url": "https://localhost:8080/v1/actors",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Antonio\",\n  \"surname\": \"Sánchez Mejías\",\n  \"email\": \"ansame@gmail.com\",\n  \"password\": \"Ansame\",\n  \"preferedLanguage\": \"es\",\n  \"phoneNumber\": \"654789215\",\n  \"address\": \"Calle Esperanza, 15\",\n  \"role\": \"SPONSOR\",\n  \"deleted\": false,\n  \"banned\": false,\n  \"created\": \"2019-03-23\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Finders",
+			"description": "",
+			"item": [
+				{
+					"name": "https://localhost:8080/v1/finders",
+					"request": {
+						"url": "https://localhost:8080/v1/finders/5c7c3be5d5b2907cf8123676",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"keyword\": \"Visita\",\n  \"startDate\": \"2019-03-24\",\n  \"endDate\": \"2019-03-24\",\n  \"minimumPrice\": 0,\n  \"maximumPrice\": 200,\n  \"explorer\":  {\n        \"preferredLanguage\": \"en\",\n        \"role\": [\n            \"EXPLORER\"\n        ],\n        \"deleted\": true,\n        \"banned\": false,\n        \"_id\": \"5c7c3be5d5b2907cf8123676\",\n        \"name\": \"string\",\n        \"surname\": \"string\",\n        \"email\": \"PRUEBA3@prueba.com\",\n        \"password\": \"$2b$05$7wNcklm7seV1s.hj/Asri.QXK4UnTEanz4EwMd7i/8C6nNNQVtGhW\",\n        \"preferedLanguage\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"address\": \"string\",\n        \"created\": \"2019-03-03T00:00:00.000Z\"\n        }\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:8080/v1/finders",
+					"request": {
+						"url": "https://localhost:8080/v1/finders",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"keyword\": \"Visita\",\n  \"startDate\": \"2019-03-24\",\n  \"endDate\": \"2019-03-24\",\n  \"minimumPrice\": 0,\n  \"maximumPrice\": 200,\n  \"explorer\":  {\n        \"preferredLanguage\": \"en\",\n        \"role\": [\n            \"EXPLORER\"\n        ],\n        \"deleted\": true,\n        \"banned\": false,\n        \"_id\": \"5c7c3be5d5b2907cf8123676\",\n        \"name\": \"string\",\n        \"surname\": \"string\",\n        \"email\": \"PRUEBA3@prueba.com\",\n        \"password\": \"$2b$05$7wNcklm7seV1s.hj/Asri.QXK4UnTEanz4EwMd7i/8C6nNNQVtGhW\",\n        \"preferedLanguage\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"address\": \"string\",\n        \"created\": \"2019-03-03T00:00:00.000Z\"\n        }\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TripStage",
+			"description": "",
+			"item": [
+				{
+					"name": "https://localhost:8080/v1/tripstages",
+					"request": {
+						"url": "https://localhost:8080/v1/tripStages",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:8080/v1/tripstages",
+					"request": {
+						"url": "https://localhost:8080/v1/tripStages",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Circuito de Jerez\",\n  \"description\": \"Visita guiado por el circuito de Jerez.\",\n  \"price\": 55.50\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Trips",
+			"description": "",
+			"item": [
+				{
+					"name": "https://localhost:8080/v1/trips",
+					"request": {
+						"url": "https://localhost:8080/v1/trips",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:8080/v1/trips",
+					"request": {
+						"url": "https://localhost:8080/v1/trips",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ticker\": \"string\",\n  \"title\": \"Visita Jerez con Encanto\",\n  \"description\": \"Visita por la ciudad de Jerez y sus lugares con más encanto.\",\n  \"startDate\": \"2019-03-24\",\n  \"endDate\": \"2019-03-24\",\n  \"created\": \"2019-03-25\",\n  \"public\": true,\n  \"manager\": {\n        \"preferredLanguage\": \"en\",\n        \"role\": [\n            \"MANAGER\"\n        ],\n        \"deleted\": false,\n        \"banned\": false,\n        \"_id\": \"5c7d73e36827d102c1c2eae5\",\n        \"name\": \"Pedro\",\n        \"surname\": \"Sánchez Pérez\",\n        \"email\": \"pesanpe@gmail.com\",\n        \"password\": \"$2b$05$mdh7gFZyotEJeqUf1b/46uk/xJR8RJuXE3SVl09O3ZbrpZZ3MLIMe\",\n        \"preferedLanguage\": \"es\",\n        \"phoneNumber\": \"605903326\",\n        \"address\": \"Calle Madre de la Iglesia 3A\",\n        \"created\": \"2019-03-04T00:00:00.000Z\"\n    },\n  \"tripStage\": [\n\t    {\n\t        \"deleted\": false,\n\t        \"_id\": \"5c97710e9e62ed5c4e569ebc\",\n\t        \"title\": \"Circuito de Jerez\",\n\t        \"description\": \"Visita guiado por el circuito de Jerez.\",\n\t        \"price\": 55.5\n\t    },\n\t    {\n\t        \"deleted\": false,\n\t        \"_id\": \"5c9772be9e62ed5c4e569ebd\",\n\t        \"title\": \"Bodegas de Jerez\",\n\t        \"description\": \"Visita guiado por las bodegas centenarias de Jerez.\",\n\t        \"price\": 120.5\n\t    }\n\t]\n\t\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TripApplications",
+			"description": "",
+			"item": [
+				{
+					"name": "https://localhost:8080/v1/tripApplications",
+					"request": {
+						"url": "https://localhost:8080/v1/tripApplications",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:8080/v1/tripApplications",
+					"request": {
+						"url": "https://localhost:8080/v1/tripApplications",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n        \"comments\": \"Querría saber la hora de salida.\",\n        \"applicationDate\": \"2019-03-24\",\n        \"rejectionReason\": \"2019-03-24\",\n        \"explorer\": \"5c7c3be5d5b2907cf8123676\",\n        \"trip\": \"5c97c4c74592d266bee63e27\"\n    }"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
