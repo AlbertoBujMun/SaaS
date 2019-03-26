@@ -81,7 +81,8 @@ exports.update_an_actor = function(req, res) {
             res.status(500).send(err);
         } else {
             console.log('actor: ' + actor);
-            var idToken = req.headers['idtoken']; //WE NEED the FireBase custom token in the req.header['idToken']... it is created by FireBase!!
+            //var idToken = req.headers['idtoken']; //WE NEED the FireBase custom token in the req.header['idToken']... it is created by FireBase!!
+            var idToken = actor.idToken;
             if (actor.role.includes('EXPLORER') || actor.role.includes('MANAGER') || actor.role.includes('SPONSOR')) {
                 var authenticatedUserId = await authController.getUserId(idToken);
                 if (authenticatedUserId == req.params.actorId) {
@@ -140,7 +141,7 @@ exports.login_an_actor = async function(req, res) {
     var password = req.query.password;
 
     Actor.findOne({ email: emailParam }, function(err, actor) {
-        if (err) { res.send(err); }
+        if (err) { res.status(500).send(err); }
 
         // No actor found with that email as username
         else if (!actor) {
@@ -159,7 +160,6 @@ exports.login_an_actor = async function(req, res) {
 
                 // Password did not match
                 else if (!isMatch) {
-                    //res.send(err);
                     res.status(401); //an access token isn’t provided, or is invalid
                     res.json({ message: 'forbidden', error: err });
                 } else {
@@ -169,13 +169,13 @@ exports.login_an_actor = async function(req, res) {
                         console.log("Error creating custom token:", error);
                     }
                     actor.customToken = customToken;
-                    actor.save(function(err, actor) {
+                    Actor.findOneAndUpdate({ _id: actor._id }, actor, { new: true }, function(err, actor) {
                         if (err) {
                             console.log(err)
                             res.status(500).send(err);
                         } else {
                             console.log('Login Success... sending JSON with custom token');
-                            res.json(actor);
+                            res.status(200).json(actor);
                         }
                     });
                 }

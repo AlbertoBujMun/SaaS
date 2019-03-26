@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function (app) {
+module.exports = function(app) {
     var actors = require("../controllers/actorController");
     var authController = require("../controllers/authController");
 
@@ -123,5 +123,5 @@ module.exports = function (app) {
     app
         .route("/v2/actors/:actorId")
         .get(actors.read_an_actor)
-        .put(authController.verifyUser(["ADMINISTRATOR,MANAGER,CUSTOMER,SPONSOR"]), actors.update_an_actor);
+        .put(authController.verifyUser(["ADMINISTRATOR", "MANAGER", "EXPLORER", "SPONSOR"]), actors.update_an_actor);
 };

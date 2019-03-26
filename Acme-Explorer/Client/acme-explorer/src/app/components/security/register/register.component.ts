@@ -13,10 +13,10 @@ export class RegisterComponent {
 
   registrationForm: FormGroup;
   errorMessage: string;
-  roleList = ['ADMINISTRATOR', 'CLERK', 'CUSTOMER'];
+  roleList = ['ADMINISTRATOR', 'EXPLORER', 'MANAGER', 'SPONSOR'];
 
   constructor(private authService: AuthService,
-      private fb: FormBuilder) {
+    private fb: FormBuilder) {
     this.createForm();
   }
 

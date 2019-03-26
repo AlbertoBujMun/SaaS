@@ -21,21 +21,21 @@ export class AuthService implements OnInit {
   constructor(private fireAuth: AngularFireAuth,
     private http: HttpClient) { }
 
-    ngOnInit() {
-      //  console.log('Invoking ngOnInit (authService)');
-        this.fireAuth.auth.onAuthStateChanged(user => {
-            if (user) {
-                console.log('-----ACTOR DE FIREBASE----: ', user);
-                // this.currentActor = user;
-                // this.setCurrentActor(this.currentActor);
+  ngOnInit() {
+    //  console.log('Invoking ngOnInit (authService)');
+    this.fireAuth.auth.onAuthStateChanged(user => {
+      if (user) {
+        console.log('-----ACTOR DE FIREBASE----: ', user);
+        // this.currentActor = user;
+        // this.setCurrentActor(this.currentActor);
 
-                const token = this.fireAuth.auth.currentUser.getIdToken();
-                localStorage.setItem('currentActor.token', JSON.stringify(token));
-            } else {
-                localStorage.removeItem('currentActor');
-            }
-        });
-    }
+        const token = this.fireAuth.auth.currentUser.getIdToken();
+        localStorage.setItem('currentActor.token', JSON.stringify(token));
+      } else {
+        localStorage.removeItem('currentActor');
+      }
+    });
+  }
 
   logout() {
     return new Promise<any>((resolve, reject) => {
@@ -50,8 +50,8 @@ export class AuthService implements OnInit {
     });
   }
 
-   login(email: string, password: string) {
-    const url = this.apiBackendUrl + `/v1/login?email=${email}&password=${password}`;
+  login(email: string, password: string) {
+    const url = this.apiBackendUrl + `/v2/login?email=${email}&password=${password}`;
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
 
@@ -60,9 +60,9 @@ export class AuthService implements OnInit {
         .then(res => {
           if (res) {
             this.currentActor = res;
-            console.log('actor: '+res);
-            console.log('actor.name: '+res.name);
-            console.log('customToken: '+res.customToken);
+            console.log('actor: ' + res);
+            console.log('actor.name: ' + res.name);
+            console.log('customToken: ' + res.customToken);
             this.fireAuth.auth.signInWithCustomToken(res.customToken)
               .then(customToken => {
                 this.fireAuth.auth.currentUser.getIdToken()
@@ -96,7 +96,7 @@ export class AuthService implements OnInit {
           // Firebase registration was correct, proceed with our backend
           const headers = new HttpHeaders();
           headers.append('Content-Type', 'application/json');
-          const url = `${this.apiBackendUrl + '/v1/actors'}`;
+          const url = `${this.apiBackendUrl + '/v2/actors'}`;
           const body = JSON.stringify(actor);
           this.http.post(url, body, httpOptions).toPromise()
             .then(res => {
@@ -111,7 +111,7 @@ export class AuthService implements OnInit {
     });
   }
 
-   setCurrentActor(actor: Actor) {
+  setCurrentActor(actor: Actor) {
     localStorage.setItem('currentActor', JSON.stringify({ actor: actor }));
   }
 
