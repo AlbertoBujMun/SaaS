@@ -170,10 +170,7 @@ function computeTripsAggregation(callback) {
                 ]
             }
         }
-    ],
-        {
-            "allowDiskUse": false
-        }
+    ]
     );
 
 };
@@ -232,10 +229,7 @@ function computePricesAggregation(callback) {
                     ]
                 }
             }
-        ],
-        {
-            "allowDiskUse": false
-        }
+        ]
     );
 };
 
@@ -294,10 +288,7 @@ function computeAggregateTripApplications(callback) {
                     ]
                 }
             }
-        ],
-        {
-            "allowDiskUse": false
-        }
+        ]
     );
 
 };

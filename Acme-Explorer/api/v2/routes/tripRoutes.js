@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function(app) {
+module.exports = function (app) {
   var trip = require("../controllers/tripController");
 
   /**
@@ -58,7 +58,7 @@ module.exports = function(app) {
    *         schema:
    *           $ref: '#/definitions/Trip'
    */
-  app.route("/v2/trips/myTrips").get(trip.list_an_actor_trips);
+  app.route("/v2/trips/actor/:actorId").get(trip.list_an_actor_trips);
 
   /**
    * @swagger

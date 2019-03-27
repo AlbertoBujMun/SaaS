@@ -2,7 +2,10 @@
 /*---------------TRIP----------------------*/
 var mongoose = require("mongoose"),
   Trip = mongoose.model("Trips"),
-  Finder = mongoose.model("Finders");
+  Finder = mongoose.model("Finders"),
+  TripApplications = mongoose.model("TripApplications");
+var async = require("async");
+var mongo = require('mongodb');
 
 exports.list_all_trips = function (req, res) {
   Trip.find({}, function (err, trip) {
@@ -72,7 +75,34 @@ exports.delete_a_trip = function (req, res) {
 };
 
 exports.list_an_actor_trips = function (req, res) {
-  res.sendStatus(200);
+  var o_id = new mongo.ObjectID(req.params.actorId);
+  TripApplications.aggregate([
+    {
+      "$match": {
+        "explorer": o_id
+      }
+    },
+    {
+      "$lookup": {
+        "from": "trips",
+        "localField": "trip",
+        "foreignField": "_id",
+        "as": "trip_applied"
+      }
+    },
+    {
+      "$project": {
+        "trip": "$trip_applied",
+        "_id": 0.0
+      }
+    }
+  ], function (err, trip) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(trip);
+    }
+  });
 };
 
 //Receives Finder id
@@ -193,3 +223,7 @@ exports.cancel_trip = function (req, res) {
   res.sendStatus(200);
 };
 
+
+function getAllFilteredTripsByActor(callback) {
+
+};
