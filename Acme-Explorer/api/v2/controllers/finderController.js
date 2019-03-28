@@ -6,15 +6,13 @@ var mongoose = require("mongoose"),
 
 
 exports.read_a_finder = function (req, res) {
-    Finder.findById(req.params.FinderId, function (err, Finder) {
+    Finder.find({ explorer: req.params.actorId }, function (err, trip) {
         if (err) {
             res.send(err);
         } else {
-            res.sendStatus(200);
-            res.json(Finder);
+            res.json(trip);
         }
     });
-
 };
 
 exports.update_a_finder = function (req, res) {

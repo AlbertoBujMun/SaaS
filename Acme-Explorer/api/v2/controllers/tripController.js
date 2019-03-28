@@ -4,7 +4,6 @@ var mongoose = require("mongoose"),
   Trip = mongoose.model("Trips"),
   Finder = mongoose.model("Finders"),
   TripApplications = mongoose.model("TripApplications");
-var async = require("async");
 var mongo = require('mongodb');
 
 exports.list_all_trips = function (req, res) {
@@ -219,8 +218,52 @@ exports.list_trips_by_keyword = function (req, res) {
 };
 
 exports.cancel_trip = function (req, res) {
-  //req.query.reason is the value for cancelationReason. 
-  res.sendStatus(200);
+  var cancelationReason = req.query.reason;
+  Trip.findById(req.params.tripId, function (err, trip) {
+    if (err) {
+      res.send(err);
+    } else {
+      if (trip) {
+        TripApplications.find({ trip: req.params.tripId }, function (err, tripApplications) {
+          if (err) {
+            res.send(err);
+          } else {
+            if (trip.cancelationReason) {
+              res.status(403);
+              res.send("No se puede cancelar un viaje que ya ha sido cancelado");
+            }
+            else {
+              if (tripApplications) {
+                res.status(403);
+                res.send("No se puede cancelar un viaje con aplicaciones");
+              }
+              else {
+                trip.cancelationReason = cancelationReason;
+                Trip.findOneAndUpdate(
+                  { _id: req.params.tripId },
+                  trip,
+                  { new: true },
+                  function (err, trip) {
+                    if (err) {
+                      res.send(err);
+                    } else {
+                      res.json(trip);
+                    }
+                  }
+
+                );
+              }
+            }
+
+
+
+          }
+
+        });
+      }
+    }
+  });
+
 };
 
 

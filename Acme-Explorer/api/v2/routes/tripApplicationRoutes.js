@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function(app) {
+module.exports = function (app) {
   var tripApplication = require("../controllers/tripApplicationController");
 
   /**
@@ -68,7 +68,7 @@ module.exports = function(app) {
    *           $ref: '#/definitions/TripApplication'
    */
   app
-    .route("/v2/tripApplications/due/:tripApplicationId")
+    .route("/v2/tripApplications/accept/:tripApplicationId")
     .put(tripApplication.due_trip_application);
 
   /**
@@ -168,6 +168,6 @@ module.exports = function(app) {
    *           $ref: '#/definitions/TripApplication'
    */
   app
-    .route("/v2/myTripApplications")
+    .route("/v2/tripApplications/actor/:actorId")
     .get(tripApplication.list_an_actor_applications);
 };
