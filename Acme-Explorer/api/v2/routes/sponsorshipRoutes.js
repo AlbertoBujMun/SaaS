@@ -7,15 +7,20 @@ module.exports = function(app) {
    *   post:
    *     tags:
    *       - SponsorShip
-   *     description: Returns all actors
+   *     description: Creates a new sponsorship
+   *     parameters:
+   *       - in: body
+   *         name: body
+   *         required: true
+   *         schema:
+   *             $ref: "#/definitions/Sponsorship"
    *     produces:
    *       - application/json
    *     responses:
    *       200:
-   *         description: An array of actors
+   *         description: Returns the newly created sponsorship
    *         schema:
    *           $ref: '#/definitions/SponsorShip'
-   *
    */
   app.route("/v2/sponsorships").post(sponsorships.create_a_sponsorship);
   /**
