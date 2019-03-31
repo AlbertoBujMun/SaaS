@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function (app) {
+module.exports = function(app) {
   var sponsorships = require("../controllers/sponsorshipController");
   /**
    * @swagger
@@ -25,32 +25,32 @@ module.exports = function (app) {
   app.route("/v2/sponsorships").post(sponsorships.create_a_sponsorship);
 
   /**
-     * @swagger
-     * /v2/sponsorships/actor/{actorId}:
-     *   get:
-     *     tags:
-     *       - SponsorShip
-     *     description: Returns all of the actors sponsorships
-     *     parameters:
-     *       - in: path
-     *         name: actorId
-     *         description: Actor who's sponsorships you want to search
-     *         required: true
-     *         type: string
-     *     produces:
-     *       - application/json
-     *     responses:
-     *       200:
-     *         description: An array of sponsorships
-     *         schema:
-     *           $ref: '#/definitions/SponsorShip'
-     */
+   * @swagger
+   * /v2/sponsorships/actor/{actorId}:
+   *   get:
+   *     tags:
+   *       - SponsorShip
+   *     description: Returns all of the actors sponsorships
+   *     parameters:
+   *       - in: path
+   *         name: actorId
+   *         description: Actor who's sponsorships you want to search
+   *         required: true
+   *         type: string
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: An array of sponsorships
+   *         schema:
+   *           $ref: '#/definitions/SponsorShip'
+   */
   app
     .route("/v2/sponsorships/actor/:actorId")
     .get(sponsorships.list_sponsorships);
   /**
    * @swagger
-   * /v2/sponsorships/{sponsorshipId}/pay:
+   * /v2/sponsorships/pay/{sponsorshipId}:
    *   put:
    *     tags:
    *       - SponsorShip
