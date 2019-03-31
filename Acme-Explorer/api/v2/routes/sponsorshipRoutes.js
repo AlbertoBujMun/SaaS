@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function(app) {
+module.exports = function (app) {
   var sponsorships = require("../controllers/sponsorshipController");
   /**
    * @swagger
@@ -23,6 +23,56 @@ module.exports = function(app) {
    *           $ref: '#/definitions/SponsorShip'
    */
   app.route("/v2/sponsorships").post(sponsorships.create_a_sponsorship);
+
+  /**
+     * @swagger
+     * /v2/sponsorships/actor/{actorId}:
+     *   get:
+     *     tags:
+     *       - SponsorShip
+     *     description: Returns all of the actors sponsorships
+     *     parameters:
+     *       - in: path
+     *         name: actorId
+     *         description: Actor who's sponsorships you want to search
+     *         required: true
+     *         type: string
+     *     produces:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: An array of sponsorships
+     *         schema:
+     *           $ref: '#/definitions/SponsorShip'
+     */
+  app
+    .route("/v2/sponsorships/actor/:actorId")
+    .get(sponsorships.list_sponsorships);
+  /**
+   * @swagger
+   * /v2/sponsorships/{sponsorshipId}/pay:
+   *   put:
+   *     tags:
+   *       - SponsorShip
+   *     description: Pay for a sponsorship
+   *     parameters:
+   *       - in: path
+   *         name: sponsorshipId
+   *         description: Sponsorship that you want to pay for
+   *         required: true
+   *         type: string
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Returns the sponsorship paid for
+   *         schema:
+   *           $ref: '#/definitions/SponsorShip'
+   */
+  app
+    .route("/v2/sponsorships/pay/:sponsorshipId")
+    .put(sponsorships.pay_a_sponsorship);
+
   /**
    * @swagger
    * /v2/sponsorships/{sponsorshipId}:
@@ -88,54 +138,7 @@ module.exports = function(app) {
     .get(sponsorships.read_a_sponsorship)
     .put(sponsorships.update_a_sponsorship)
     .delete(sponsorships.delete_a_sponsorship);
-  /**
-   * @swagger
-   * /v2/sponsorships/actor/{actorId}:
-   *   get:
-   *     tags:
-   *       - SponsorShip
-   *     description: Returns all of the actors sponsorships
-   *     parameters:
-   *       - in: path
-   *         name: actorId
-   *         description: Actor who's sponsorships you want to search
-   *         required: true
-   *         type: string
-   *     produces:
-   *       - application/json
-   *     responses:
-   *       200:
-   *         description: An array of sponsorships
-   *         schema:
-   *           $ref: '#/definitions/SponsorShip'
-   */
-  app
-    .route("/v2/sponsorships/actor/:actorId")
-    .get(sponsorships.list_sponsorships);
-  /**
-   * @swagger
-   * /v2/sponsorships/{sponsorshipId}/pay:
-   *   put:
-   *     tags:
-   *       - SponsorShip
-   *     description: Pay for a sponsorship
-   *     parameters:
-   *       - in: path
-   *         name: sponsorshipId
-   *         description: Sponsorship that you want to pay for
-   *         required: true
-   *         type: string
-   *     produces:
-   *       - application/json
-   *     responses:
-   *       200:
-   *         description: Returns the sponsorship paid for
-   *         schema:
-   *           $ref: '#/definitions/SponsorShip'
-   */
-  app
-    .route("/v2/sponsorships/:sponsorshipId/pay")
-    .put(sponsorships.pay_a_sponsorship);
+
   /**
    * @swagger
    * /v2/sponsorships/random/{ticker}:
