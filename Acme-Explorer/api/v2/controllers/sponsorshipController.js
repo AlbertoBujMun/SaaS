@@ -79,11 +79,10 @@ exports.pay_a_sponsorship = function (req, res) {
     } else {
       if (sponsorship.paymentDate) {
         res.status(403);
-        res.send("No se puede pagar un patrocinio que ya ha sido pagado");
+        res.send("You can't pay a sponsorship that has already been paid");
       }
       else {
         sponsorship.paymentDate = new Date()
-        console.log(sponsorship);
         Sponsorship.findOneAndUpdate(
           { _id: req.params.sponsorshipId },
           sponsorship,
@@ -92,8 +91,6 @@ exports.pay_a_sponsorship = function (req, res) {
             if (err) {
               res.send(err);
             } else {
-              console.log(sponsorship.paymentDate);
-              console.log(sponsorship);
               res.json(sponsorship);
             }
           }
