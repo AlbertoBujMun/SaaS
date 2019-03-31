@@ -50,7 +50,7 @@ var FinderSchema = new Schema({
   },
   maximumPrice: {
     type: Number,
-    default: 0,
+    default: 999999,
     validate: [
       isGreaterThan,
       "The maximum price must be greater than the minimum price"

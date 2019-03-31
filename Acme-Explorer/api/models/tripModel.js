@@ -115,16 +115,12 @@ var TripSchema = new Schema({
         type: Schema.Types.ObjectId,
         required: "Manager id is required"
     },
+    price: {
+        type: Number
+    },
     tripStage: [TripStageSchema]
 }, { strict: false });
 
-TripSchema.virtual("price").get(function() {
-    var i = 0;
-    this.tripStage.forEach(function(x) {
-        i = i + x.price
-    })
-    return i;
-});
 
 TripSchema.index({ "tripStage.price": 1 });
 TripSchema.index({ startDate: 1 });
@@ -133,7 +129,7 @@ TripSchema.index({ created: 1 });
 TripSchema.index({ title: "text", description: "text", ticker: "text" });
 
 // Execute before each trip.save() call
-TripSchema.pre("save", function(callback) {
+TripSchema.pre("save", function (callback) {
     var new_trip = this;
     var day = dateFormat(new Date(), "yymmdd");
 
@@ -141,6 +137,11 @@ TripSchema.pre("save", function(callback) {
         "-"
     );
     new_trip.ticker = generated_ticker;
+    var pr = 0;
+    for (var i = 0, len = new_trip.tripStage.length; i < len; i++) {
+        pr = pr + new_trip.tripStage[i].price;
+    }
+    new_trip.price = pr;
     callback();
 });
 
