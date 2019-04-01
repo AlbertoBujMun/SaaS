@@ -124,65 +124,69 @@ exports.search_trips = function(req, res) {
     //1.- control the authorization in order to include deleted items in the results if the requester is an Administrator.
     var query = {};
 
-    Finder.findById(req.params.FinderId, function(err, Finder) {
+    Finder.findById(req.params.finderId, function(err, finder) {
         if (err) {
             res.status(500).send(err);
         } else {
-            finder = Finder;
+            if (finder) {
+
+                if (finder.keyword) {
+                    query.$text = { $search: finder.keyword };
+                }
+                if (finder.minimumPrice) {
+                    query.price = { $gte: finder.minimumPrice }
+                }
+                if (finder.maximumPrice) {
+                    query.price = { $lte: finder.maximumPrice }
+                }
+                if (finder.startDate) {
+                    query.startDate = finder.startDate;
+                }
+                if (finder.endDate) {
+                    query.endDate = finder.endDate;
+                }
+
+                query.deleted = false;
+
+                var skip = 0;
+                if (req.query.startFrom) {
+                    skip = parseInt(req.query.startFrom);
+                }
+                var limit = 0;
+                if (req.query.pageSize) {
+                    limit = parseInt(req.query.pageSize);
+                }
+
+                var sort = "";
+                if (req.query.reverse == "true") {
+                    sort = "-";
+                }
+                if (req.query.sortedBy) {
+                    sort += req.query.sortedBy;
+                }
+
+                console.log("Query: " + query + " Skip:" + skip + " Limit:" + limit + " Sort:" + sort);
+
+                Trip.find(query)
+                    .sort(sort)
+                    .skip(skip)
+                    .limit(limit)
+                    .lean()
+                    .exec(function(err, trip) {
+                        console.log('Start searching trips');
+                        if (err) {
+                            res.status(500).send(err);
+                        } else {
+                            res.status(200).json(trip);
+                        }
+
+                        console.log('End searching trips');
+                    });
+            } else {
+                res.status(404).send("No se ha encontrado el finder especificado")
+            }
         }
     });
-
-    if (finder.keyword) {
-        query.$text = { $search: finder.keyword };
-    }
-    if (finder.minimumPrice) {
-        query.price = { $gte: finder.minimumPrice }
-    }
-    if (finder.maximumPrice) {
-        query.price = { $lte: finder.maximumPrice }
-    }
-    if (finder.startDate) {
-        query.startDate = finder.startDate;
-    }
-    if (finder.endDate) {
-        query.endDate = finder.endDate;
-    }
-
-    query.deleted = false;
-
-    var skip = 0;
-    if (req.query.startFrom) {
-        skip = parseInt(req.query.startFrom);
-    }
-    var limit = 0;
-    if (req.query.pageSize) {
-        limit = parseInt(req.query.pageSize);
-    }
-
-    var sort = "";
-    if (req.query.reverse == "true") {
-        sort = "-";
-    }
-    if (req.query.sortedBy) {
-        sort += req.query.sortedBy;
-    }
-
-    console.log("Query: " + query + " Skip:" + skip + " Limit:" + limit + " Sort:" + sort);
-
-    Trip.find(query)
-        .sort(sort)
-        .skip(skip)
-        .limit(limit)
-        .lean()
-        .exec(function(err, trip) {
-            console.log('Start searching trips');
-            if (err) {
-                res.status(500).send(err);
-            } else {
-                res.status(200).json(trip);
-            }
-            console.log('End searching trips');
-        });
 };
 
 //Receives Keyword

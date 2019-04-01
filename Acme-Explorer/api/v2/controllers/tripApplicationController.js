@@ -30,9 +30,9 @@ exports.create_a_tripApplication = function(req, res) {
                 if (trip.cancelationReason) {
                     res.status(403);
                     res.send("El viaje ha sido cancelado anteriormente");
-                } else if (!trip.public) {
+                } else if (!(trip.public && trip.startDate > new Date()) || trip.cancelationReason) {
                     res.status(403);
-                    res.send("El viaje ha sido cancelado anteriormente");
+                    res.send("El viaje no ha sido publicado, ha comenzado o se ha cancelado.");
                 } else {
                     new_tripApplication.save(function(error, tripApplication) {
                         if (error) {
@@ -164,14 +164,16 @@ exports.cancel_trip_application = function(req, res) {
     TripApplication.findById(req.params.tripApplicationId, function(err, tripApplication) {
         if (err) {
             res.send(err);
-        } else {
+        } else if (tripApplication.status == 'ACCEPTED' || tripApplication.status == 'PENDING') {
             if (tripApplication.explorer) {
-                checkAccepted(res, tripApplication)
-                checkDue(res, tripApplication)
-                checkCanceled(res, tripApplication)
-                tripApplication.status = 'CANCELED'
+                checkAccepted(res, tripApplication);
+                checkDue(res, tripApplication);
+                checkCanceled(res, tripApplication);
+                tripApplication.status = 'CANCELED';
             }
-            updateStatus(req, res, tripApplication)
+            updateStatus(req, res, tripApplication);
+        } else {
+            res.status(403).send(err);
         }
 
     });
