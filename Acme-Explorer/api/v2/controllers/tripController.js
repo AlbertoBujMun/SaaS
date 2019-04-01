@@ -275,22 +275,7 @@ exports.list_trips_by_keyword = function (req, res) {
         res.status(500).send(err);
       }
       else {
-        finder.lastCached = Date.now();
-        finder.results = trip;
-        Finder.findOneAndUpdate(
-          { _id: req.params.finderId },
-          finder,
-          { new: true },
-          function (err, finder) {
-            if (err) {
-              res.status(500).send(err);
-            }
-
-          }
-        );
-        if (!res.headersSent) {
-          res.status(200).json(trip);
-        }
+        res.status(200).json(trip);
       }
       console.log('End searching trips');
     });
