@@ -55,18 +55,9 @@ function createDataWareHouseJob() {
         async.parallel([
             computePricesAggregation,
             computeTripsManagerAggregation,
-            computeAggregateTripApplications
-            /*,
-                        computePricesAggregation,
-                        computeTripsAggregation*/
-            //computeAverageFinderPrices,
-            // computeMostCommonKeywordsFinder
-            /*   computeTopCancellers,
-              computeTopNotCancellers,
-              computeBottomNotCancellers,
-              computeTopClerks,
-              computeBottomClerks,
-              computeRatioCancelledOrders */
+            computeAggregateTripApplications,
+            computeMostCommonKeywordsFinder,
+            computeAverageFinderPrices
         ], function(err, results) {
             if (err) {
                 console.log("Error computing datawarehouse: " + err);
@@ -88,8 +79,8 @@ function createDataWareHouseJob() {
                 new_dataWareHouse.ratioAcceptedApplications = 0;
                 new_dataWareHouse.ratioPendingApplications = 0;
                 new_dataWareHouse.ratioRejectedApplications = 0;
-                new_dataWareHouse.averagePriceRange = 0;
-                new_dataWareHouse.topKeyWords = 'Hola';
+                new_dataWareHouse.averagePriceRange = results[4];
+                new_dataWareHouse.topKeyWords = results[3];
                 new_dataWareHouse.rebuildPeriod = rebuildPeriod;
                 new_dataWareHouse.save(function(err, datawarehouse) {
                     if (err) {
@@ -146,15 +137,17 @@ function computeApplicationsByStatus(callback) {
         }
     ]);
 };
-/*
+
 function computeAverageFinderPrices(callback) {
     Finders.aggregate([{
         $project: {
             _id: 1,
             avgMinimumPrice: { $avg: "$minimumPrice" },
-            avgMaximumPrice: { "$avg": "$maximumPrice" }
+            avgMaximumPrice: { $avg: "$maximumPrice" }
         }
-    }]);
+    }], function(err, res) {
+        callback(err, res[0])
+    });
 };
 
 function computeMostCommonKeywordsFinder(callback) {
@@ -165,7 +158,7 @@ function computeMostCommonKeywordsFinder(callback) {
         callback(err, res[0])
     });
 };
-*/
+
 function computeTripsManagerAggregation(callback) {
     Trips.aggregate([{
             $group: {
