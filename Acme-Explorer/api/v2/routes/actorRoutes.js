@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function(app) {
+module.exports = function (app) {
     var actors = require("../controllers/actorController");
     var authController = require("../controllers/authController");
 
@@ -83,6 +83,39 @@ module.exports = function(app) {
      */
     app.route('/v2/actors/fs')
         .post(actors.actors_json_fs);
+
+    /**
+         * @swagger
+         * /v2/actors/ban/{actorId}:
+         *   put:
+         *     tags:
+         *       - Actor
+         *     summary: Update an existing Actor
+         *     description: Update an existing Actor
+         *     parameters:
+         *       - in: path
+         *         name: actorId
+         *         description: Update an Actor
+         *         required: true
+         *         type: string
+         *       - in: body
+         *         name: body
+         *         description: Update an Actor
+         *         required: true
+         *         schema:
+         *             $ref: "#/definitions/Actor"
+         *     produces:
+         *       - application/json
+         *     responses:
+         *       200:
+         *         description: successful operation
+         *         schema:
+         *           $ref: '#/definitions/Actor'
+         *
+         */
+    app
+        .route("/v2/actors/ban/:actorId")
+        .put(actors.ban_an_actor);
 
 
     /**
