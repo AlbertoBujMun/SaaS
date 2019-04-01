@@ -3,7 +3,8 @@
 var mongoose = require("mongoose"),
   Trip = mongoose.model("Trips"),
   Finder = mongoose.model("Finders"),
-  TripApplications = mongoose.model("TripApplications");
+  TripApplications = mongoose.model("TripApplications"),
+  SystemInformation = mongoose.model("SystemInformations");
 var mongo = require('mongodb');
 
 exports.list_all_trips = function (req, res) {
@@ -125,85 +126,114 @@ exports.search_trips = function (req, res) {
   //1.- control the authorization in order to include deleted items in the results if the requester is an Administrator.
   var query = {};
 
-  Finder.findById(req.params.finderId, function (err, finder) {
+  var cacheTime = null;
+  SystemInformation.find({}, function (err, systemInfo) {
     if (err) {
       res.status(500).send(err);
     } else {
-      if (finder) {
+      cacheTime = systemInfo[0].cacheTime;
+    }
 
-        if (finder.keyword) {
-          query.$text = { $search: finder.keyword };
-        }
-        if (finder.minimumPrice) {
-          query.price = { $gte: finder.minimumPrice }
-        }
-        if (finder.maximumPrice) {
-          query.price = { $lte: finder.maximumPrice }
-        }
-        if (finder.startDate) {
-          query.startDate = {
-            "$gte": finder.startDate,
-            "$lte": finder.endDate
-          };
-        }
+    Finder.findById(req.params.finderId, function (err, finder) {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        if (finder) {
 
 
-        query.deleted = false;
+          if (finder.keyword) {
+            query.$text = { $search: finder.keyword };
+          }
+          if (finder.minimumPrice) {
+            query.price = { $gte: finder.minimumPrice }
+          }
+          if (finder.maximumPrice) {
+            query.price = { $lte: finder.maximumPrice }
+          }
+          if (finder.startDate) {
+            query.startDate = {
+              "$gte": finder.startDate,
+              "$lte": finder.endDate
+            };
+          }
 
-        var skip = 0;
-        if (req.query.startFrom) {
-          skip = parseInt(req.query.startFrom);
-        }
-        var limit = 0;
-        if (req.query.pageSize) {
-          limit = parseInt(req.query.pageSize);
-        }
 
-        var sort = "";
-        if (req.query.reverse == "true") {
-          sort = "-";
-        }
-        if (req.query.sortedBy) {
-          sort += req.query.sortedBy;
-        }
+          query.deleted = false;
 
-        console.log("Query: " + query + " Skip:" + skip + " Limit:" + limit + " Sort:" + sort);
+          var skip = 0;
+          if (req.query.startFrom) {
+            skip = parseInt(req.query.startFrom);
+          }
+          var limit = 0;
+          if (req.query.pageSize) {
+            limit = parseInt(req.query.pageSize);
+          }
 
-        Trip.find(query)
-          .sort(sort)
-          .skip(skip)
-          .limit(limit)
-          .lean()
-          .exec(function (err, trip) {
-            console.log('Start searching trips');
-            if (err) {
-              res.status(500).send(err);
-            } else {
-              finder.lastCached = Date.now();
-              finder.results = trip;
-              Finder.findOneAndUpdate(
-                { _id: req.params.finderId },
-                finder,
-                { new: true },
-                function (err, finder) {
-                  if (err) {
-                    res.status(500).send(err);
-                  }
-                  else {
-                    res.status(200).json(trip);
-                  }
+          var sort = "";
+          if (req.query.reverse == "true") {
+            sort = "-";
+          }
+          if (req.query.sortedBy) {
+            sort += req.query.sortedBy;
+          }
+
+
+
+
+          console.log("Query: " + query + " Skip:" + skip + " Limit:" + limit + " Sort:" + sort);
+          var compareDate = new Date().getTime() - 1000 * 60 * 60 * cacheTime;
+          if (finder.lastCached && finder.lastCached.getTime() > compareDate) {
+            console.log("Resultados recuperados de cache");
+            Trip.find({
+              '_id': { $in: finder.results }
+            }, function (err, trips) {
+              if (err) {
+                res.status(500).send(err);
+              } else {
+                res.status(200).json(trips);
+              }
+            });
+
+
+          }
+          else {
+            Trip.find(query)
+              .sort(sort)
+              .skip(skip)
+              .limit(limit)
+              .lean()
+              .exec(function (err, trip) {
+                console.log('Start searching trips');
+                if (err) {
+                  res.status(500).send(err);
+                } else {
+                  finder.lastCached = Date.now();
+                  finder.results = trip;
+                  Finder.findOneAndUpdate(
+                    { _id: req.params.finderId },
+                    finder,
+                    { new: true },
+                    function (err, finder) {
+                      if (err) {
+                        res.status(500).send(err);
+                      }
+                      else {
+                        res.status(200).json(trip);
+                      }
+
+                    }
+                  );
 
                 }
-              );
 
-            }
-
-            console.log('End searching trips');
-          });
-      } else {
-        res.status(404).send("No se ha encontrado el finder especificado")
+                console.log('End searching trips');
+              });
+          }
+        } else {
+          res.status(404).send("No se ha encontrado el finder especificado")
+        }
       }
-    }
+    });
   });
 };
 
