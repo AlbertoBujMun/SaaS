@@ -167,3 +167,5 @@ app.get("/swagger.json", function(req, res) {
     res.setHeader("Content-Type", "application/json");
     res.send(swaggerSpec);
 });
+
+DataWareHouseTools.createDataWareHouseJob();

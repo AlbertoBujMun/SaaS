@@ -1,29 +1,29 @@
-
 var async = require("async");
 var mongoose = require('mongoose'),
-    DataWareHouse = mongoose.model('DataWareHouse');
-/*   Orders = mongoose.model('Orders'); */
+    DataWareHouse = mongoose.model('DataWareHouse'),
+    /*   Orders = mongoose.model('Orders'); */
+    Trips = mongoose.model('Trips'),
+    TripApplications = mongoose.model('TripApplications'),
+    Finders = mongoose.model('Finders');
 
-exports.list_all_indicators = function (req, res) {
+exports.list_all_indicators = function(req, res) {
     console.log('Requesting indicators');
 
-    DataWareHouse.find().sort("-computationMoment").exec(function (err, indicators) {
+    DataWareHouse.find().sort("-computationMoment").exec(function(err, indicators) {
         if (err) {
             res.send(err);
-        }
-        else {
+        } else {
             res.json(indicators);
         }
     });
 };
 
-exports.last_indicator = function (req, res) {
+exports.last_indicator = function(req, res) {
 
-    DataWareHouse.find().sort("-computationMoment").limit(1).exec(function (err, indicators) {
+    DataWareHouse.find().sort("-computationMoment").limit(1).exec(function(err, indicators) {
         if (err) {
             res.send(err);
-        }
-        else {
+        } else {
             res.json(indicators);
         }
     });
@@ -36,10 +36,10 @@ var CronTime = require('cron').CronTime;
 //'*/30 * * * * *' cada 30 segundos
 //'*/10 * * * * *' cada 10 segundos
 //'* * * * * *' cada segundo
-var rebuildPeriod = '*/10 * * * * *';  //El que se usará por defecto
+var rebuildPeriod = '*/60 * * * * *'; //El que se usará por defecto
 var computeDataWareHouseJob;
 
-exports.rebuildPeriod = function (req, res) {
+exports.rebuildPeriod = function(req, res) {
     console.log('Updating rebuild period. Request: period:' + req.query.rebuildPeriod);
     rebuildPeriod = req.query.rebuildPeriod;
     computeDataWareHouseJob.setTime(new CronTime(rebuildPeriod));
@@ -49,45 +49,86 @@ exports.rebuildPeriod = function (req, res) {
 };
 
 function createDataWareHouseJob() {
-    computeDataWareHouseJob = new CronJob(rebuildPeriod, function () {
+    computeDataWareHouseJob = new CronJob(rebuildPeriod, function() {
 
         var new_dataWareHouse = new DataWareHouse();
         console.log('Cron job submitted. Rebuild period: ' + rebuildPeriod);
         async.parallel([
+            computeTripsAggregation
+            /*,
+                        computePricesAggregation,
+                        computeTripsAggregation*/
+            //computeAverageFinderPrices,
+            // computeMostCommonKeywordsFinder
             /*   computeTopCancellers,
               computeTopNotCancellers,
               computeBottomNotCancellers,
               computeTopClerks,
               computeBottomClerks,
               computeRatioCancelledOrders */
-        ], function (err, results) {
+        ], function(err, results) {
             if (err) {
                 console.log("Error computing datawarehouse: " + err);
-            }
-            else {
-                //console.log("Resultados obtenidos por las agregaciones: "+JSON.stringify(results));
-                /*  new_dataWareHouse.topCancellers = results[0];
-                 new_dataWareHouse.topNotCancellers = results[1];
-                 new_dataWareHouse.bottomNotCancellers = results[2];
-                 new_dataWareHouse.topClerks = results[3];
-                 new_dataWareHouse.bottomClerks = results[4];
-                 new_dataWareHouse.ratioCancelledOrders = results[5];
-                 new_dataWareHouse.rebuildPeriod = rebuildPeriod; */
+            } else {
+                console.log("Resultados obtenidos por las agregaciones: " + JSON.stringify(results));
+                new_dataWareHouse.averageNumTrips = 0;
 
-                new_dataWareHouse.save(function (err, datawarehouse) {
+                new_dataWareHouse.minNumTrips = 0;
+
+                new_dataWareHouse.maxNumTrips = 0;
+
+                new_dataWareHouse.standardDevNumTrips = 0;
+
+                new_dataWareHouse.averageNumApplications = 0;
+
+                new_dataWareHouse.minNumApplications = 0;
+
+                new_dataWareHouse.maxNumApplications = 0;
+
+                new_dataWareHouse.standardDevNumApplications = 0;
+
+                new_dataWareHouse.averagePrices = 0;
+
+                new_dataWareHouse.minPrices = 0;
+
+                new_dataWareHouse.maxPrices = 0;
+
+                new_dataWareHouse.standardDevPrices = 0;
+
+                new_dataWareHouse.ratioDueApplications = 0;
+
+                new_dataWareHouse.ratioAcceptedApplications = 0;
+
+                new_dataWareHouse.ratioPendingApplications = 0;
+
+                new_dataWareHouse.ratioRejectedApplications = 0;
+
+                new_dataWareHouse.averagePriceRange = 0;
+
+                new_dataWareHouse.topKeyWords = 'Hola';
+
+                new_dataWareHouse.rebuildPeriod = rebuildPeriod;
+
+                new_dataWareHouse.save(function(err, datawarehouse) {
                     if (err) {
                         console.log("Error saving datawarehouse: " + err);
-                    }
-                    else {
+                    } else {
                         console.log("new DataWareHouse succesfully saved. Date: " + new Date());
                     }
                 });
             }
         });
     }, null, true, 'Europe/Madrid');
+
 }
 
 module.exports.createDataWareHouseJob = createDataWareHouseJob;
+
+function computeAverageTripsManager(callback) {
+    Trips.aggregate([
+        { $project: { _id: 1, "averageNumTrips": { "$min": "$startDate" } } }
+    ]);
+};
 
 function computeApplicationsRatioByStatus(callback) {
     TripApplications.aggregate([
@@ -117,8 +158,7 @@ function computeMostCommonKeywordsFinder(callback) {
 };
 
 function computeTripsAggregation(callback) {
-    Trips.aggregate([
-        {
+    Trips.aggregate([{
             "$group": {
                 "_id": "$managerId",
                 "tripsManaged": {
@@ -128,50 +168,41 @@ function computeTripsAggregation(callback) {
         },
         {
             "$facet": {
-                "avgTrips": [
-                    {
-                        "$project": {
-                            "_id": 0.0,
-                            "data": {
-                                "$avg": "$tripsManaged"
-                            }
+                "avgTrips": [{
+                    "$project": {
+                        "_id": 0.0,
+                        "data": {
+                            "$avg": "$tripsManaged"
                         }
                     }
-                ],
-                "minTrips": [
-                    {
-                        "$project": {
-                            "_id": 0.0,
-                            "data": {
-                                "$min": "$tripsManaged"
-                            }
+                }],
+                "minTrips": [{
+                    "$project": {
+                        "_id": 0.0,
+                        "data": {
+                            "$min": "$tripsManaged"
                         }
                     }
-                ],
-                "maxTrips": [
-                    {
-                        "$project": {
-                            "_id": 0.0,
-                            "data": {
-                                "$max": "$tripsManaged"
-                            }
+                }],
+                "maxTrips": [{
+                    "$project": {
+                        "_id": 0.0,
+                        "data": {
+                            "$max": "$tripsManaged"
                         }
                     }
-                ],
-                "stdevTrips": [
-                    {
-                        "$project": {
-                            "_id": 0.0,
-                            "data": {
-                                "$stdDevPop": "$tripsManaged"
-                            }
+                }],
+                "stdevTrips": [{
+                    "$project": {
+                        "_id": 0.0,
+                        "data": {
+                            "$stdDevPop": "$tripsManaged"
                         }
                     }
-                ]
+                }]
             }
         }
-    ]
-    );
+    ]);
 
 };
 
@@ -187,46 +218,38 @@ function computePricesAggregation(callback) {
             },
             {
                 "$facet": {
-                    "avgTrips": [
-                        {
-                            "$project": {
-                                "_id": 0,
-                                "data": {
-                                    "$avg": "$precio"
-                                }
+                    "avgTrips": [{
+                        "$project": {
+                            "_id": 0,
+                            "data": {
+                                "$avg": "$precio"
                             }
                         }
-                    ],
-                    "minTrips": [
-                        {
-                            "$project": {
-                                "_id": 0,
-                                "data": {
-                                    "$min": "$precio"
-                                }
+                    }],
+                    "minTrips": [{
+                        "$project": {
+                            "_id": 0,
+                            "data": {
+                                "$min": "$precio"
                             }
                         }
-                    ],
-                    "maxTrips": [
-                        {
-                            "$project": {
-                                "_id": 0,
-                                "data": {
-                                    "$max": "$precio"
-                                }
+                    }],
+                    "maxTrips": [{
+                        "$project": {
+                            "_id": 0,
+                            "data": {
+                                "$max": "$precio"
                             }
                         }
-                    ],
-                    "stdevTrips": [
-                        {
-                            "$project": {
-                                "_id": 0,
-                                "data": {
-                                    "$stdDevPop": "$precio"
-                                }
+                    }],
+                    "stdevTrips": [{
+                        "$project": {
+                            "_id": 0,
+                            "data": {
+                                "$stdDevPop": "$precio"
                             }
                         }
-                    ]
+                    }]
                 }
             }
         ]
@@ -235,8 +258,7 @@ function computePricesAggregation(callback) {
 
 function computeAggregateTripApplications(callback) {
     TripApplications.aggregate(
-        [
-            {
+        [{
                 "$group": {
                     "_id": "$tripId",
                     "applicationsPerTrip": {
@@ -246,46 +268,38 @@ function computeAggregateTripApplications(callback) {
             },
             {
                 "$facet": {
-                    "avgTrips": [
-                        {
-                            "$project": {
-                                "_id": 0.0,
-                                "data": {
-                                    "$avg": "$applicationsPerTrip"
-                                }
+                    "avgTrips": [{
+                        "$project": {
+                            "_id": 0.0,
+                            "data": {
+                                "$avg": "$applicationsPerTrip"
                             }
                         }
-                    ],
-                    "minTrips": [
-                        {
-                            "$project": {
-                                "_id": 0.0,
-                                "data": {
-                                    "$min": "$applicationsPerTrip"
-                                }
+                    }],
+                    "minTrips": [{
+                        "$project": {
+                            "_id": 0.0,
+                            "data": {
+                                "$min": "$applicationsPerTrip"
                             }
                         }
-                    ],
-                    "maxTrips": [
-                        {
-                            "$project": {
-                                "_id": 0.0,
-                                "data": {
-                                    "$max": "$applicationsPerTrip"
-                                }
+                    }],
+                    "maxTrips": [{
+                        "$project": {
+                            "_id": 0.0,
+                            "data": {
+                                "$max": "$applicationsPerTrip"
                             }
                         }
-                    ],
-                    "stdevTrips": [
-                        {
-                            "$project": {
-                                "_id": 0.0,
-                                "data": {
-                                    "$stdDevPop": "$applicationsPerTrip"
-                                }
+                    }],
+                    "stdevTrips": [{
+                        "$project": {
+                            "_id": 0.0,
+                            "data": {
+                                "$stdDevPop": "$applicationsPerTrip"
                             }
                         }
-                    ]
+                    }]
                 }
             }
         ]
