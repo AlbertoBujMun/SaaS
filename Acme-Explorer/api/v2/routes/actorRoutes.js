@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function (app) {
+module.exports = function(app) {
     var actors = require("../controllers/actorController");
     var authController = require("../controllers/authController");
 
@@ -63,24 +63,24 @@ module.exports = function (app) {
      * @param {string} sourceFile   //mandatory
      * Sample 1: http://localhost:8080/v1/actors/insertMany?dbURL=mongodb://myUser:myUserPassword@localhost:27017/ACME-Market&mongooseModel=Actors&sourceFile=c:/temp/Customer.json
      * Sample 2: http://localhost:8080/v1/actors/insertMany?dbURL=mongodb://myUser:myUserPassword@localhost:27017/ACME-Market&mongooseModel=Test&sourceFile=c:/temp/many_npm.json
-    */
+     */
     app.route("/v2/actors/insertMany")
         .post(actors.actors_json_insertMany);
 
     /**
-         * Put a large json with documents from a file into a collection of mongoDB
-         *
-         * @section actors
-         * @type post
-         * @url /v1/actors/fs
-         * @param {string} dbURL       //mandatory
-         * @param {string} collection  //mandatory
-         * @param {string} sourceURL   //mandatory
-         * @param {string} batchSize   //optional
-         * @param {string} parseString //optional
-         * Sample 1: http://localhost:8080/v1/actors/fs?dbURL=mongodb://myUser:myUserPassword@localhost:27017/ACME-Market&collection=test&batchSize=100&parseString=rows.*&sourceFile=c:\temp\many_npm.json
-         * Sample 2: http://localhost:8080/v1/actors/fs?dbURL=mongodb://myUser:myUserPassword@localhost:27017/ACME-Market&collection=actors&batchSize=100&parseString=*&sourceFile=c:\temp\Customer.json
-      */
+     * Put a large json with documents from a file into a collection of mongoDB
+     *
+     * @section actors
+     * @type post
+     * @url /v1/actors/fs
+     * @param {string} dbURL       //mandatory
+     * @param {string} collection  //mandatory
+     * @param {string} sourceURL   //mandatory
+     * @param {string} batchSize   //optional
+     * @param {string} parseString //optional
+     * Sample 1: http://localhost:8080/v1/actors/fs?dbURL=mongodb://myUser:myUserPassword@localhost:27017/ACME-Market&collection=test&batchSize=100&parseString=rows.*&sourceFile=c:\temp\many_npm.json
+     * Sample 2: http://localhost:8080/v1/actors/fs?dbURL=mongodb://myUser:myUserPassword@localhost:27017/ACME-Market&collection=actors&batchSize=100&parseString=*&sourceFile=c:\temp\Customer.json
+     */
     app.route('/v2/actors/fs')
         .post(actors.actors_json_fs);
 
