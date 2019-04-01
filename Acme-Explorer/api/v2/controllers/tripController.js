@@ -43,6 +43,7 @@ exports.update_a_trip = function(req, res) {
             res.status(500).send(err);
         } else {
             if (!trip.public) {
+                calcularPrecio(req.body);
                 Trip.findOneAndUpdate({ _id: req.params.tripId },
                     req.body, { new: true },
                     function(err, trip) {
@@ -224,9 +225,22 @@ exports.list_trips_by_keyword = function(req, res) {
         .exec(function(err, trip) {
             console.log('Start searching trips');
             if (err) {
-                res.status(500).send(err);
-            } else {
-                res.status(200).json(trip);
+              res.status(500).send(err);
+            }
+            else {
+              finder.lastCached = Date.now();
+              finder.results = trip;
+              Finder.findOneAndUpdate(
+                {_id: req.params.finderId},
+                finder,
+                { new: true },
+                function (err, finder) {
+                  if(err) {
+                    res.status(500).send(err);
+                  }
+                }
+              );
+              res.status(200).json(trip);
             }
             console.log('End searching trips');
         });
@@ -277,6 +291,14 @@ exports.cancel_trip = function(req, res) {
 
 };
 
+function calcularPrecio(new_trip) {
+  var pr = 0;
+  console.log("Entra");
+    for (var i = 0, len = new_trip.tripStage.length; i < len; i++) {
+        pr = pr + new_trip.tripStage[i].price;
+    }
+    new_trip.price = pr;
+};
 
 function getAllFilteredTripsByActor(callback) {
 

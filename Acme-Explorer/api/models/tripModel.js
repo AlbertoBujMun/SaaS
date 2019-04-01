@@ -137,11 +137,6 @@ TripSchema.pre("save", function (callback) {
         "-"
     );
     new_trip.ticker = generated_ticker;
-    var pr = 0;
-    for (var i = 0, len = new_trip.tripStage.length; i < len; i++) {
-        pr = pr + new_trip.tripStage[i].price;
-    }
-    new_trip.price = pr;
     callback();
 });
 

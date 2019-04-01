@@ -78,73 +78,90 @@ module.exports = function(app) {
      */
     app.route("/v2/trips/simpleSearch/:keyword").get(trip.list_trips_by_keyword);
 
-    /**
-     * @swagger
-     * /v2/trips/advancedSearch/:finderId:
-     *   get:
-     *     tags:
-     *       - Trip
-     *     description: Returns all trips filtering by a finder
-     *     produces:
-     *       - application/json
-     *     responses:
-     *       200:
-     *         description: An array of trips
-     *         schema:
-     *           $ref: '#/definitions/Trip'
-     */
-    app.route("/v2/trips/advancedSearch/:finderId").get(trip.search_trips);
+  /**
+   * @swagger
+   * /v2/trips/advancedSearch/{finderId}:
+   *   get:
+   *     tags:
+   *       - Trip
+   *     description: Returns all trips filtering by a finder
+   *     parameters:
+   *       - in: path
+   *         name: finderId
+   *         description: Finder that you want to use
+   *         required: true
+   *         type: string
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: An array of trips
+   *         schema:
+   *           $ref: '#/definitions/Trip'
+   */
+  app.route("/v2/trips/advancedSearch/:finderId").get(trip.search_trips);
 
-    /**
-     * @swagger
-     * /v2/trips/:tripId:
-     *   get:
-     *     tags:
-     *       - Trip
-     *     description: Returns all actors
-     *     produces:
-     *       - application/json
-     *     responses:
-     *       200:
-     *         description: An array of actors
-     *         schema:
-     *           $ref: '#/definitions/Trip'
-     */
-    /**
-     * @swagger
-     * /v2/trips/:tripId:
-     *   put:
-     *     tags:
-     *       - Trip
-     *     description: Returns all actors
-     *     produces:
-     *       - application/json
-     *     responses:
-     *       200:
-     *         description: An array of actors
-     *         schema:
-     *           $ref: '#/definitions/Trip'
-     */
-    /**
-     * @swagger
-     * /v2/trips/:tripId:
-     *   delete:
-     *     tags:
-     *       - Trip
-     *     description: Delete a trip
-     *     produces:
-     *       - application/json
-     *     responses:
-     *       200:
-     *         description: returns the trip deleted
-     *         schema:
-     *           $ref: '#/definitions/Trip'
-     */
-    app
-        .route("/v2/trips/:tripId")
-        .get(trip.read_a_trip)
-        .put( /*authController.verifyUser(["MANAGER"]),*/ trip.update_a_trip)
-        .delete( /*authController.verifyUser(["MANAGER"]),*/ trip.delete_a_trip);
+  /**
+   * @swagger
+   * /v2/trips/:tripId:
+   *   get:
+   *     tags:
+   *       - Trip
+   *     description: Returns all actors
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: An array of actors
+   *         schema:
+   *           $ref: '#/definitions/Trip'
+   */
+  /**
+   * @swagger
+   * /v2/trips/{tripId}:
+   *   put:
+   *     tags:
+   *       - Trip
+   *     description: Modifies a trip
+   *     parameters:
+   *       - in: path
+   *         name: tripId
+   *         description: Trip that you want to modify
+   *         required: true
+   *         type: string
+   *       - in: body
+   *         name: body
+   *         required: true
+   *         schema:
+   *             $ref: "#/definitions/Trip"
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: The modified trip
+   *         schema:
+   *           $ref: '#/definitions/Trip'
+   */
+  /**
+   * @swagger
+   * /v2/trips/:tripId:
+   *   delete:
+   *     tags:
+   *       - Trip
+   *     description: Delete a trip
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: returns the trip deleted
+   *         schema:
+   *           $ref: '#/definitions/Trip'
+   */
+  app
+    .route("/v2/trips/:tripId")
+    .get(trip.read_a_trip)
+    .put(trip.update_a_trip)
+    .delete(trip.delete_a_trip);
 
     /**
      * @swagger
