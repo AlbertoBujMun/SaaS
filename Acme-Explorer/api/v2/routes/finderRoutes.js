@@ -3,7 +3,7 @@ module.exports = function (app) {
     var finders = require("../controllers/finderController");
     /**
      * @swagger
-     * /v2/finders/{actorId}:
+     * /v2/finders/actor/{actorId}:
      *   get:
      *     tags:
      *       - Finder
@@ -22,19 +22,27 @@ module.exports = function (app) {
      *         description: A finder
      *         schema:
      *           $ref: '#/definitions/Finder'
+     */
+    app
+        .route("/v2/finders/actor/:actorId")
+        .get(finders.read_a_finder);
+
+        /**
+     * @swagger
+     * /v2/finders/{finderId}:
      *   put:
      *     tags:
      *       - Finder
      *     description: Returns an updated finder
      *     parameters:
      *       - in: path
-     *         name: actorId
-     *         description: Update an Actor
+     *         name: finderId
+     *         description: Id of the finder that you want to update
      *         required: true
      *         type: string
      *       - in: body
      *         name: body
-     *         description: Update an Actor
+     *         description: Updated finder
      *         required: true
      *     produces:
      *       - application/json
@@ -45,7 +53,6 @@ module.exports = function (app) {
      *           $ref: '#/definitions/Finder'
      */
     app
-        .route("/v2/finders/:actorId")
-        .get(finders.read_a_finder)
-        .put(finders.update_a_finder);
+    .route("/v2/finders/:finderId")
+    .put(finders.update_a_finder);
 };
