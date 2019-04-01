@@ -42,6 +42,7 @@ exports.update_a_trip = function (req, res) {
     if (err) {
       res.send(err);
     } else {
+      calcularPrecio(req.body);
       Trip.findOneAndUpdate(
         { _id: req.params.tripId },
         req.body,
@@ -165,6 +166,18 @@ exports.search_trips = function (req, res) {
               res.send(err);
             }
             else {
+              finder.lastCached = Date.now();
+              finder.results = trip;
+              Finder.findOneAndUpdate(
+                {_id: req.params.finderId},
+                finder,
+                { new: true },
+                function (err, finder) {
+                  if(err) {
+                    res.send(err);
+                  }
+                }
+              );
               res.json(trip);
             }
 
@@ -271,6 +284,14 @@ exports.cancel_trip = function (req, res) {
 
 };
 
+function calcularPrecio(new_trip) {
+  var pr = 0;
+  console.log("Entra");
+    for (var i = 0, len = new_trip.tripStage.length; i < len; i++) {
+        pr = pr + new_trip.tripStage[i].price;
+    }
+    new_trip.price = pr;
+};
 
 function getAllFilteredTripsByActor(callback) {
 

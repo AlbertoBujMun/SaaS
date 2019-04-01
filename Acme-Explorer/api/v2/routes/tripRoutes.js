@@ -79,11 +79,17 @@ module.exports = function (app) {
 
   /**
    * @swagger
-   * /v2/trips/advancedSearch/:finderId:
+   * /v2/trips/advancedSearch/{finderId}:
    *   get:
    *     tags:
    *       - Trip
    *     description: Returns all trips filtering by a finder
+   *     parameters:
+   *       - in: path
+   *         name: finderId
+   *         description: Finder that you want to use
+   *         required: true
+   *         type: string
    *     produces:
    *       - application/json
    *     responses:
@@ -111,16 +117,27 @@ module.exports = function (app) {
    */
   /**
    * @swagger
-   * /v2/trips/:tripId:
+   * /v2/trips/{tripId}:
    *   put:
    *     tags:
    *       - Trip
-   *     description: Returns all actors
+   *     description: Modifies a trip
+   *     parameters:
+   *       - in: path
+   *         name: tripId
+   *         description: Trip that you want to modify
+   *         required: true
+   *         type: string
+   *       - in: body
+   *         name: body
+   *         required: true
+   *         schema:
+   *             $ref: "#/definitions/Trip"
    *     produces:
    *       - application/json
    *     responses:
    *       200:
-   *         description: An array of actors
+   *         description: The modified trip
    *         schema:
    *           $ref: '#/definitions/Trip'
    */
